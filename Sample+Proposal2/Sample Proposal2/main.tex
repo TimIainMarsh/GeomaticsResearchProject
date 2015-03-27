@@ -1,0 +1,135 @@
+%----------------------------------------------------
+% This is a preamble to the document
+% The preamble of a document is where you place formatting information.
+% It may look complicated but it is actually quite simple. 
+% Comments have been added here to help you understand the meaning of the commands
+%----------------------------------------------------
+\documentclass[11pt,a4paper,final]{article}
+\usepackage[latin1]{inputenc}
+
+
+%----------------------------------------------------
+% AMS Math package for math symbols
+% Comment this line if you won't include math symbols in your document
+%----------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%\usepackage{amsthm}
+%\usepackage{makeidx}
+
+%----------------------------------------------------
+% Setup the geometry of the document
+%----------------------------------------------------
+\usepackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm]{geometry}
+
+
+%----------------------------------------------------
+% Information for the title page
+%----------------------------------------------------
+\author{George Sithole}
+\title{Mathematics for Geomaticians}
+\date{28 January 2011}
+
+
+%----------------------------------------------------
+% PDF
+% The pdftex package should be included if you intend
+% to include graphics in your document.
+% Comment the line below if you won't include graphics in your documnet.
+%----------------------------------------------------
+\usepackage[pdftex]{color,graphicx}
+
+
+%----------------------------------------------------
+% Paragraph formatting
+% Change the following commands to affect paragraph
+% formatting.
+%----------------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+
+%----------------------------------------------------
+% New commands
+%----------------------------------------------------
+\include{newcommands}
+
+
+%----------------------------------------------------
+% Set equation numbering style
+%----------------------------------------------------
+\numberwithin{equation}{section}	% this will cause equation numbers to include section numbers
+
+
+%----------------------------------------------------
+% Bibliography style
+% Comment this line if your document won't include references
+%----------------------------------------------------
+\bibliographystyle{plain}
+%\usepackage{chicago}
+%\citestyle{plain}
+%\bibliographystyle{chicago}
+%\bibliographystyle{plainnat}
+
+
+% This is where you include the content of your document
+\begin{document}
+
+%----------------------------------------------------
+% Change page numbering to roman numeral
+%----------------------------------------------------
+\pagenumbering{roman} 	% This command changes page numbering to roman numerals
+\include{titlepage}
+\include{abstract}
+
+
+%----------------------------------------------------
+% Table of content
+% Comment the lines below if you don't want a table of
+% contents
+%----------------------------------------------------
+\pagebreak			 % This command causes a pagebreak
+\tableofcontents	 % This command creates the table of contents
+
+
+%----------------------------------------------------
+% List of figures and list of tables
+% Comment the lines below if you don't want a list of
+% figures or a list of tables
+%----------------------------------------------------
+%\pagebreak	% This command causes a pagebreak
+%\addcontentsline{toc}{chapter}{List of Figures}	% This command adds a line to the table of contents
+%\listoffigures	% This command creates a list of figures
+
+%\pagebreak
+%\addcontentsline{toc}{chapter}{List of Tables} 
+%\listoftables	% This command creates a list of tables
+
+
+%----------------------------------------------------
+% Change page numbering to arabic
+%----------------------------------------------------
+\setcounter{page}{1} % This command sets the page number to 1
+\pagenumbering{arabic}	% This command changes page numbering to arabic
+
+
+%----------------------------------------------------
+% Chapters
+%----------------------------------------------------
+\include{introduction}
+\include{previouswork}
+\include{method}
+\include{outcomes}
+\include{schedule}
+\include{conclusion}
+
+
+%----------------------------------------------------
+% Bibliography/References
+%----------------------------------------------------
+\include{references}
+
+
+\end{document}
+

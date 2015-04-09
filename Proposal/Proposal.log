@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.2.24)  9 APR 2015 12:26
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.2.24)  9 APR 2015 13:16
 entering extended mode
 **Proposal.tex
 (T:\GeomaticsResearchProject\Proposal\Proposal.tex
@@ -216,21 +216,22 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ]
 (T:\GeomaticsResearchProject\Proposal\includes/PreviousWork.tex
-Underfull \hbox (badness 10000) in paragraph at lines 10--13
+Underfull \hbox (badness 10000) in paragraph at lines 11--14
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 17.
+) [2
+
+
+] (T:\GeomaticsResearchProject\Proposal\includes/Method.tex
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 31.
+
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 17.
-) [2
-
-
-]
-(T:\GeomaticsResearchProject\Proposal\includes/Method.tex [3
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 31.
+ [3
 
 
 ]) [4]
@@ -252,13 +253,13 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (T:\GeomaticsResearchProject\Proposal\includes/Outcomes.aux)
 (T:\GeomaticsResearchProject\Proposal\includes/references.aux)) ) 
 Here is how much of TeX's memory you used:
- 2205 strings out of 493921
- 29705 string characters out of 3147270
+ 2204 strings out of 493921
+ 29690 string characters out of 3147270
  82355 words of memory out of 3000000
- 5435 multiletter control sequences out of 15000+200000
+ 5434 multiletter control sequences out of 15000+200000
  10404 words of font info for 39 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 27i,4n,24p,735b,215s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,4n,24p,570b,215s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/f
@@ -266,7 +267,7 @@ onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmsy10.pfb>
-Output written on Proposal.pdf (9 pages, 248106 bytes).
+Output written on Proposal.pdf (9 pages, 247691 bytes).
 PDF statistics:
  57 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -13,7 +13,7 @@
 
 \subsection{Objectives}
 
-The objective of this project is to be able to create wire frame models of the interior of buildings, through point cloud segmentation and line fitting. %maybe 
+The objective of this project is to be able to create wire frame models of the interior of buildings.
 
 Point clouds are notoriously difficult to navigate on computers, especially the interior of buildings. creating a wire frame model makes the buildings interior easier to navigate, measure and use in a practical way.
 
@@ -22,7 +22,7 @@ A surface reconstruction procedure cannot guarantee the recovering of the surfac
 
 Using C++ and Point Cloud Library (PCL) an algorithm to complete these tasks with as little intervention as possible will be written as an add on function onto existing software.
 
-For this to take place all data structures and files will need to be in a standardised files.
+For this to take place all outputted data must be in recognised file formats.
 
 
 \subsection{Questions}
@@ -30,13 +30,15 @@ For this to take place all data structures and files will need to be in a standa
 
 \item How do we go about segmenting the point cloud?
 
+\item What is the best way to find breaklines? (edges)
+
 \item How do we decide which point belongs to which room in the case of multiple rooms?
 
-\item generalising ad removing points? adding points if necessary?
+\item generalising, removing points? adding points if necessary?
 
 \item Triangulation, use all points? or minimize number of lines in the render?
 
-\item Hough transform to find breaklines? 
+\item RANSAC?
 
 \end{itemize}
 
@@ -56,6 +58,8 @@ From points to surface:
 
 \item post processing - when the model is created, editing operations are commonly applied to refine and perfect the polygonal surface
 \end{enumerate}
+
+\subsection{Other Considerations}
 
 In some cases there may be an shortage of points or in the more likely case there are to many points. for example a wall, we don't need 100 000 points to approximate a wall, so we can generalize that segment to make computations easier and faster.
 

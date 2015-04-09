@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.11)  25 MAR 2015 16:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.2.24)  9 APR 2015 12:26
 entering extended mode
 **Proposal.tex
-(T:\Geomatics_Research_Project-2\Proposal\Proposal.tex
+(T:\GeomaticsResearchProject\Proposal\Proposal.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -146,26 +146,26 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks23
 \@floatcapt=\box29
 )
-(T:\Geomatics_Research_Project-2\Proposal\Proposal.aux
-(T:\Geomatics_Research_Project-2\Proposal\titlepage.aux)
-(T:\Geomatics_Research_Project-2\Proposal\Abstract.aux)
-(T:\Geomatics_Research_Project-2\Proposal\Introduction.aux)
-(T:\Geomatics_Research_Project-2\Proposal\PreviousWork.aux)
-(T:\Geomatics_Research_Project-2\Proposal\Method.aux)
-(T:\Geomatics_Research_Project-2\Proposal\Outcomes.aux)
-(T:\Geomatics_Research_Project-2\Proposal\references.aux))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
+(T:\GeomaticsResearchProject\Proposal\Proposal.aux
+(T:\GeomaticsResearchProject\Proposal\includes/titlepage.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/Abstract.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/Introduction.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/PreviousWork.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/Method.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/Outcomes.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/references.aux))
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -180,23 +180,24 @@ LaTeX Font Info:    ... okay on input line 20.
 \MPnumerator=\count105
 \makeMPintoPDFobject=\count106
 \everyMPtoPDFconversion=\toks25
-) (T:\Geomatics_Research_Project-2\Proposal\titlepage.tex
-<./UCTcircular_logo1_CMYK.jpg, id=1, 171.5208pt x 173.9298pt>
-File: ./UCTcircular_logo1_CMYK.jpg Graphic file (type jpg)
+) (T:\GeomaticsResearchProject\Proposal\includes/titlepage.tex
+<includes/images/UCTcircular_logo1_CMYK.jpg, id=1, 171.5208pt x 173.9298pt>
+File: includes/images/UCTcircular_logo1_CMYK.jpg Graphic file (type jpg)
 
-<use ./UCTcircular_logo1_CMYK.jpg>
-Package pdftex.def Info: ./UCTcircular_logo1_CMYK.jpg used on input line 19.
+<use includes/images/UCTcircular_logo1_CMYK.jpg>
+Package pdftex.def Info: includes/images/UCTcircular_logo1_CMYK.jpg used on inp
+ut line 19.
 (pdftex.def)             Requested size: 180.0pt x 182.53082pt.
 ) [1
 
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <T:/Geomatics_Research_Pro
-ject-2/Proposal/UCTcircular_logo1_CMYK.jpg>] (T:\Geomatics_Research_Project-2\P
-roposal\Abstract.tex) [1
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <T:/GeomaticsResearchProje
+ct/Proposal/includes/images/UCTcircular_logo1_CMYK.jpg>]
+(T:\GeomaticsResearchProject\Proposal\includes/Abstract.tex) [1
 
 
 ]
-(T:\Geomatics_Research_Project-2\Proposal\Proposal.toc
+(T:\GeomaticsResearchProject\Proposal\Proposal.toc
 LaTeX Font Info:    Try loading font information for U+msa on input line 5.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
@@ -211,10 +212,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [2
 
 ]
-(T:\Geomatics_Research_Project-2\Proposal\Introduction.tex) [1
+(T:\GeomaticsResearchProject\Proposal\includes/Introduction.tex) [1
 
 ]
-(T:\Geomatics_Research_Project-2\Proposal\PreviousWork.tex
+(T:\GeomaticsResearchProject\Proposal\includes/PreviousWork.tex
 Underfull \hbox (badness 10000) in paragraph at lines 10--13
 
  []
@@ -229,43 +230,43 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 
 
 ]
-(T:\Geomatics_Research_Project-2\Proposal\Method.tex [3
+(T:\GeomaticsResearchProject\Proposal\includes/Method.tex [3
 
 
 ]) [4]
-(T:\Geomatics_Research_Project-2\Proposal\Outcomes.tex) [5
+(T:\GeomaticsResearchProject\Proposal\includes/Outcomes.tex) [5
 
 
 ]
-(T:\Geomatics_Research_Project-2\Proposal\references.tex
-(T:\Geomatics_Research_Project-2\Proposal\Proposal.bbl)) [6
+(T:\GeomaticsResearchProject\Proposal\includes/references.tex
+(T:\GeomaticsResearchProject\Proposal\Proposal.bbl)) [6
 
 
 ]
-(T:\Geomatics_Research_Project-2\Proposal\Proposal.aux
-(T:\Geomatics_Research_Project-2\Proposal\titlepage.aux)
-(T:\Geomatics_Research_Project-2\Proposal\Abstract.aux)
-(T:\Geomatics_Research_Project-2\Proposal\Introduction.aux)
-(T:\Geomatics_Research_Project-2\Proposal\PreviousWork.aux)
-(T:\Geomatics_Research_Project-2\Proposal\Method.aux)
-(T:\Geomatics_Research_Project-2\Proposal\Outcomes.aux)
-(T:\Geomatics_Research_Project-2\Proposal\references.aux)) ) 
+(T:\GeomaticsResearchProject\Proposal\Proposal.aux
+(T:\GeomaticsResearchProject\Proposal\includes/titlepage.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/Abstract.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/Introduction.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/PreviousWork.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/Method.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/Outcomes.aux)
+(T:\GeomaticsResearchProject\Proposal\includes/references.aux)) ) 
 Here is how much of TeX's memory you used:
- 2203 strings out of 493921
- 29353 string characters out of 3147270
+ 2205 strings out of 493921
+ 29705 string characters out of 3147270
  82355 words of memory out of 3000000
  5435 multiletter control sequences out of 15000+200000
  10404 words of font info for 39 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 27i,4n,24p,726b,218s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb>
-Output written on Proposal.pdf (9 pages, 247738 bytes).
+ 27i,4n,24p,735b,215s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb>
+Output written on Proposal.pdf (9 pages, 248106 bytes).
 PDF statistics:
  57 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.2.24)  9 APR 2015 14:57
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.2.24)  9 APR 2015 15:15
 entering extended mode
 **Proposal.tex
 (T:\GeomaticsResearchProject\Proposal\Proposal.tex
@@ -224,13 +224,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--14
 
 
 ] (T:\GeomaticsResearchProject\Proposal\includes/Method.tex
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 31.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 33.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 31.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 33.
  [3
 
 
@@ -267,7 +267,7 @@ onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmsy10.pfb>
-Output written on Proposal.pdf (9 pages, 247705 bytes).
+Output written on Proposal.pdf (9 pages, 247807 bytes).
 PDF statistics:
  57 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

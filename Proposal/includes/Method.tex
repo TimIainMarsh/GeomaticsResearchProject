@@ -17,10 +17,12 @@ The objective of this project is to be able to create wire frame models of the i
 
 Point clouds are notoriously difficult to navigate on computers, especially the interior of buildings. creating a wire frame model makes the buildings interior easier to navigate, measure and use in a practical way.
 
-The goal of surface reconstruction can be said as follows: Given a set of sample points P assumed to lie on or near an unknown surface S, create a surface model S' approximating S
+The goal of surface reconstruction can be said as follows: Given a set of sample points P assumed to lie on or near an unknown surface S, create a surface model S' approximating S.
 A surface reconstruction procedure cannot guarantee the recovering of the surface exactly, since we have information about the surface only through a finite set of points.
 
-Using C++ and Point Cloud Library (PCL) an algorithm to complete these tasks with as little intervention as possible will be written as an add on function onto existing software.
+The programming will be done in C++ as this language is popular, has a large community and supports many large and popular libraries such as Point Cloud Library (PCL). 
+
+Using C++ and PCL an algorithm to complete these tasks with as little intervention as possible will be written as an add on function onto existing software.
 
 For this to take place all outputted data must be in recognised file formats.
 
@@ -30,7 +32,7 @@ For this to take place all outputted data must be in recognised file formats.
 
 \item How do we go about segmenting the point cloud?
 
-\item What is the best way to find breaklines? (edges)
+\item What is the best way to find breaklines, edges?
 
 \item How do we decide which point belongs to which room in the case of multiple rooms?
 

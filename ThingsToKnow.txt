@@ -1,0 +1,7 @@
+QT creator on linux debian
+cmake
+PCL compile from source for easier use
+
+testing on clouds scanned ourselves.
+
+need to work kut how to change from las to pcd

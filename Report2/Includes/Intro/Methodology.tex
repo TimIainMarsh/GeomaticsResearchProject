@@ -1,0 +1,60 @@
+\subsection{Methodology}
+
+\subsubsection{Objectives}
+
+The objective of this project is to be able to create wire frame models of the interior of buildings.
+
+Point clouds are notoriously difficult to navigate on computers, especially the interior of buildings. creating a wire frame model makes the buildings interior easier to navigate, measure and use in a practical way.
+
+The goal of surface reconstruction can be said as follows: Given a set of sample points P assumed to lie on or near an unknown surface S, create a surface model S' approximating S.
+A surface reconstruction procedure cannot guarantee the recovering of the surface exactly, since we have information about the surface only through a finite set of points.
+
+The programming will be done in C++ as this language is popular, has a large community and supports many large and popular libraries such as Point Cloud Library (PCL). 
+
+Using C++ and PCL an algorithm to complete these tasks with as little intervention as possible will be written as an add on function onto existing software.
+
+For this to take place all outputted data must be in recognised file formats.
+
+
+\subsubsection{Questions}
+\begin{itemize}
+
+\item How do we go about segmenting the point cloud?
+
+\item What is the best way to find breaklines, edges?
+
+\item How do we decide which point belongs to which room in the case of multiple rooms?
+
+\item Generalising, removing points? adding points if necessary?
+
+\item Triangulation, use all points? or minimize number of lines in the render?
+
+\item RANSAC?
+
+\end{itemize}
+
+
+\subsubsection{Proposed methods}
+
+
+From points to surface:
+%section 4.2 from FROM POINT CLOUD TO SURFACE: THE MODELING AND VISUALIZATION PROBLEM
+
+\begin{enumerate}
+\item Pre-Processing - Removing noise, cleaning up data to allow work to be done on it, or sampling to reduce computation time.
+
+\item Determination of the global topology of the objects surface - Look for segments and make sure features such as breadlines and such are preserved
+	
+\item Generation of the surface - Triangular meshes or planes are created satisfying certain requirements e.g. size limits ect \ldots
+
+\item Post processing - When the model is created, editing operations are commonly applied to refine and perfect the polygonal surface
+\end{enumerate}
+
+\subsubsection{Other Considerations}
+
+In some cases there may be an shortage of points or in the more likely case there are to many points. for example a wall, we don't need 100 000 points to approximate a wall, so we can generalize that segment to make computations easier and faster.
+
+But equally we may get a terrible approximation if we are missing large portions of the wall due to scan shadows we may get a really bad approximation of the wall in places so adding points may become necessary.
+
+
+

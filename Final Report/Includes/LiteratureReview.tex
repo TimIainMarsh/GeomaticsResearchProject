@@ -1,0 +1,41 @@
+
+\section{Literature Review}
+	
+	
+%	With laser scanning becoming much more popular as a surveying method, it becomes important for us to be able to interpret the data the laser scanner is giving us, especially in an indoor environment.//
+	
+	% computer vision
+	
+	Points within a 3d point cloud are simply represented by their x, y, z Cartesian coordinates, with respect to a given origin. This means that there is a possibility that there are two points with the same x, y, z Cartesian coordinates that have been acquired at different times, this is assuming that the origin is the same. Comparing these points is not as easy as one would assume, they may occupy the same point in space, but who are we do assume that they are the same.
+	
+	We may get some extra data from a laser scanner, such as intensity and colour. But this doesn't really give us any more information about the area surrounding these points and weather anything has changed.
+	
+	Situations where points need to be compared for any reason require more information than can be provided by a laser scanner. So the idea of looking at each point individually now falls away. We need to start looking at the bigger picture of what the point cloud is telling us.
+	
+	\subsection{Normal Determination}
+	For a point to exist in a cloud and have x, y, z colour and intensity values associated with it, the point will have had to be on the surface of something. So with this knowledge we can start to create information about this point.
+			
+		\subsubsection{Principal Components Analysis}
+		Principal Components Analysis (PCA), is a statistical technique that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called Principal components. the number of principal components is less than or equal to the dimensions of the data set, so in the case of point clouds 3.
+		
+		The first of the Principal components represents the largest variability in the data set, with the variability decreasing as you go along. essentially resulting in the 3rd Principal component being the normal to the surface.
+		
+	\subsection{Region Growing}
+	
+	\subsection{Plane Fitting to Segments}
+	
+	\subsection{Removal of Segments}
+	
+	\subsection{Intersection of Planes}
+	
+	\subsection{title}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

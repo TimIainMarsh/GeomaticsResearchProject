@@ -1,4 +1,4 @@
-\section{Method}
+\chapter{Method}
 
 
 	
@@ -16,12 +16,40 @@
 
 	
 	
-	\subsection{Region Growing}
+	\section{Region Growing}
+	Point Cloud Libraries region growing algorithm starts off by calculating the curvature for each point then sorting all points by their curvature value. this is because the point with the least curvature associated with it is located in the flattest section of the point cloud. Once the cloud is sorted the region growing part of the algorithm begins:
 	
-	\subsection{Plane Fitting to Segments}
+	\renewcommand\labelitemi{{\boldmath$\cdot$}}
+	\begin{itemize}
+		\item The algorithm picks the point with the smallest curvature and adds it to a set called seeds.
+		
+		\item For every seed point the algorithm looks at all the neighbors and decides if they are part of that seeds region or not. This is done by looking at certain criteria with user specified thresholds.
+		
+		\begin{itemize}
+			\item Does the points normal deviate by more than the user specified threshold from the seed point.
+			
+			\item Does the points curvature deviate by more than the user specified threshold from the seed point.
+			
+		\end{itemize}
+		
+		\item Once no more points are found for that particular seed, or the region reached a specified maximum, the seed is removed from the set of seeds and the region as added to the global segment list. If no more seeds are in the set the process is started from the beginning again, except this time the points that have been assigned to a region are no longer available to be seed points or to become part of a region.
+		
+	\end{itemize}
 	
-	\subsection{Removal of Segments}
+	If after a seed point has been through the process and the number of points does not reach the user defined minimum size the whole region removed from the cloud as unclassified and will inevitably be removed by the user.
 	
-	\subsection{Intersection of Planes}
 	
-	\subsection{title}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Includes/images/LitReview/RegionGrowing}
+		\caption{Pseudo code for region growing algorithm}
+		\label{fig:RegionGrowing}
+	\end{figure}
+	
+\section{Plane Fitting to Segments}
+
+\section{Removal of Segments}
+
+\section{Intersection of Planes}
+
+\section{title}

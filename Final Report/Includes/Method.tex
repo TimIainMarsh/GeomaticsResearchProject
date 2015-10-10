@@ -8,9 +8,14 @@
 	\\
 	Machine learning is a subfield of computer science that evolved from pattern recognition and learning theory in artificial intelligence. it is in the field of machine learning that we start to look at the bigger picture of what our point clouds are telling us. Machine learning is the study of creating algorithms that can learn from and make predictions about data.\\
 	\\
+	The aim of this Thesis is, given an uncleaned, noisy point cloud of a room to create an .obj file with lines representing all the edges of that room.
 	
-
 	
+	\section{Normal Calculation}
+		PCA
+		
+	\section{K-d Tree}
+		
 	
 	\section{Region Growing}
 	Point Cloud Libraries region growing algorithm starts off by calculating the curvature for each point then sorting all points by their curvature value. this is because the point with the least curvature associated with it is located in the flattest section of the point cloud. Once the cloud is sorted the region growing part of the algorithm begins:
@@ -34,18 +39,28 @@
 	
 	If after a seed point has been through the process and the number of points does not reach the user defined minimum size the whole region removed from the cloud as unclassified and will inevitably be removed by the user.
 	
+	\section{Segment selection}
+		Vert
+		Size
+		
+		Hor
+		
+	\section{Bounding box}
+		OBB
+		Moment of inertia
+		
+	\section{Corner Points Adjustment}
 	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.7\linewidth]{Includes/images/LitReview/RegionGrowing}
-		\caption{Pseudo code for region growing algorithm}
-		\label{fig:RegionGrowing}
-	\end{figure}
+		\subsection{Plane fitting}
+		
+		\subsection{Angle between Planes}
+		
+		\subsection{Plane with Plane Intersection}
+		
+		\subsection{Orthogonal Distance of point to line}
+		
+		\subsection{Project points onto line}
+		
+	\section{Create OBJ file}
 	
-\section{Plane Fitting to Segments}
-
-\section{Removal of Segments}
-
-\section{Intersection of Planes}
-
-\section{title}
+	\section{Viewer (maybe)}

@@ -28,19 +28,9 @@
 		
 		Walls, by definition, cover the full vertical extent of a room. But when working wit laser scans this is not something that you can enforce because there is often clutter in the way so the full extent of the wall is not seen. So to deal with this \citeauthor{mura_automatic_2014} employed a simple visibility test to determine if one segment was 'in-front' of another. They cast rays from the scan center through the OBB (oriented bounding box) and set out to determine if those rays intersected any other segment. If they did the first segment obviously lies in-front of the other.
 	
-	\subsection{Plane extending - - ?}
-		try find a paper on it
-		
-		..
-		
-		..
-		
-		..
-		
-		..
-		
-		..
-	
+	\subsection{Segment Boundary Adjustment}
+		[Not sure where to find information on the moving of segments corners to nearest line]
+
 	
 \section{Basis of Program}
 	\subsection{Normal Determination}
@@ -87,25 +77,17 @@
 			
 			
 			
-	\subsection{RANSAC}
-		Ransac Here
-			
-			
-			
-			
+	\subsection{Random sample consensus}
+		Random sample consensus (RANSAC) is an iterative method used to estimate the model coefficients of a set of observed data that contains outliers. RANSAC was developed by \citeauthor{fischler_random_1981} in \citeyear{fischler_random_1981} as a way of solving the Location Determination Problem in photogrammetry and computer vision applications.
+		
+		RANSAC achieves its goal by iteratively selecting a random subset of the original data, this subset of the original data are considered inliers. A model is then fitted to the inliers (A plane or line ect). The remainder of the data set is then compared to the model if a point fits well with the model it is considered a hypothetical inlier. The model is then re-estimated from the hypothetical inliers. The model is then evaluated by the error relative to the inliers of the model.
+		
+		This process is repeated a fixed number of times, each time either rejecting the model if there are too few inliers, or replacing the last saved model if the error is lower.
+		
 	
 	\subsection{Open Multi-Processing}
 		OpenMP is an application programming interface (API) for writing multi-threaded applications. Certain functions in Point Cloud Library have support for multi-threading using OpenMP.
 		
 		OpenMP is used in some of Point Cloud Libraries stock functions and allow multi-threading to speed up processing times. unfortunately it is not supported for the segmentation algorithms because race conditions prevent it from being correctly implemented. 
-
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		The Normal estimation class in Point Cloud Library has an OpenMP replacement that is 100\% compatible with the single-threaded function, so requires no effort to run the normal estimation up to 8 times faster depending on the number of cores the computer has to offer.

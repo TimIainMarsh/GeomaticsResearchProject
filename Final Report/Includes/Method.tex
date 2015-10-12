@@ -1,3 +1,4 @@
+
 \chapter{Method}
 	
 	Points within a 3d point cloud are simply represented by their x, y, z Cartesian coordinates. This means that there is a possibility that there are two points with the same x, y, z coordinates that have been acquired at different times, this is assuming that the origin is the same. Comparing these points is not as easy as one would assume, they may occupy the same point in space, but cannot simply assume that they are the same.
@@ -11,49 +12,76 @@
 	The aim of this Thesis is, given an uncleaned, noisy point cloud of a room to create an .obj file with lines representing all the edges of that room.
 	
 	
-	\section{Normal Calculation}
-		PCA
+\section{Segmentation}
+
+	\subsection{Principal Components Analysis}
+		A Principal Components Analysis (PCA) is the default method for estimating normals in Point Cloud Library. it is the fastest method because of PCL's multi-threading option for the function.
 		
-	\section{RANSAC}
+		The normal estimation function is simply reduced to an analysis of the eigenvectors and eigenvalues of a covariance matrix of the nearest neighbors of the point.
 		
-	\section{K-d Tree}
-		
+		\begin{figure}[H]
+			\centering
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{Includes/images/pca1}
+				\caption{}
+				\label{fig:sub1}
+			\end{subfigure}%
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{Includes/images/pca2}
+				\caption{}
+				\label{fig:sub2}
+			\end{subfigure}
+			\caption{PCA}
+			\label{fig:test}
+		\end{figure} 
+
+ 
+
+
+				
+	\subsection{Region Growing}
+	%mention colour based region grwoing
 	
-	\section{Region Growing}
-	Point Cloud Libraries region growing algorithm starts off by calculating the curvature for each point then sorting all points by their curvature value. this is because the point with the least curvature associated with it is located in the flattest section of the point cloud. Once the cloud is sorted the region growing part of the algorithm begins:
-	
-	\renewcommand\labelitemi{{\boldmath$\cdot$}}
-	\begin{itemize}
-		\item The algorithm picks the point with the smallest curvature and adds it to a set called seeds.
-		
-		\item For every seed point the algorithm looks at all the neighbors and decides if they are part of that seeds region or not. This is done by looking at certain criteria with user specified thresholds.
+		Point Cloud Libraries region growing algorithm starts off by calculating the curvature for each point then sorting all points by their curvature value. this is because the point with the least curvature associated with it is located in the flattest section of the point cloud. Once the cloud is sorted the region growing part of the algorithm begins:
 		
 		\begin{itemize}
-			\item Does the points normal deviate by more than the user specified threshold from the seed point.
+			\item The algorithm picks the point with the smallest curvature and adds it to a set called seeds.
 			
-			\item Does the points curvature deviate by more than the user specified threshold from the seed point.
+			\item For every seed point the algorithm looks at all the neighbors and decides if they are part of that seeds region or not. This is done by looking at certain criteria with user specified thresholds.
+			
+			\begin{itemize}
+				\item Does the points normal deviate by more than the user specified threshold from the seed point.
+				
+				\item Does the points curvature deviate by more than the user specified threshold from the seed point.
+				
+			\end{itemize}
+			
+			\item Once no more points are found for that particular seed, or the region reached a specified maximum, the seed is removed from the set of seeds and the region as added to the global segment list. If no more seeds are in the set the process is started from the beginning again, except this time the points that have been assigned to a region are no longer available to be seed points or to become part of a region.
 			
 		\end{itemize}
 		
-		\item Once no more points are found for that particular seed, or the region reached a specified maximum, the seed is removed from the set of seeds and the region as added to the global segment list. If no more seeds are in the set the process is started from the beginning again, except this time the points that have been assigned to a region are no longer available to be seed points or to become part of a region.
+		If after a seed point has been through the process and the number of points does not reach the user defined minimum size the whole region removed from the cloud as unclassified and will inevitably be removed by the user.
 		
-	\end{itemize}
 	
-	If after a seed point has been through the process and the number of points does not reach the user defined minimum size the whole region removed from the cloud as unclassified and will inevitably be removed by the user.
-	
-	\section{Segment selection}
-		Vert
-		Size
+
+
+\section{Surface Extraction}
 		
-		Hor
-		
-	\section{Bounding box}
+		\subsection{Segment selection}
+			Vert
+			Size
+			
+			Hor
+
+		\subsection{RANSAC}
+
+
+\section{Model Generation}
+		\subsection{Bounding Box Generation}
 		OBB
 		Moment of inertia
-		
-	\section{Corner Points Adjustment}
-	
-		\subsection{Plane fitting}
 		
 		\subsection{Angle between Planes}
 		
@@ -63,5 +91,8 @@
 		
 		\subsection{Project points onto line}
 		
-	\section{Create OBJ file}
+		\subsection{Create OBJ file}
+
 	
+
+

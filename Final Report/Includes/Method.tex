@@ -59,14 +59,14 @@
 			\\
 			There is no mathematical method for determining the sign of the normal, its orientation as computed in the PCA is ambiguous, and not consistent over the whole point cloud. 
 			
-			The solution to this issue is simple. If the viewpoint is known, in the case of laser scans the scan center, then orientate all normals $\vec{n_i}$ towards the viewpoint. This whole process results in what is seen in figure \ref{fig:Normals}
+			The solution to this issue is simple. If the viewpoint is known, in the case of laser scans the scan center, then orientate all normals $\vec{n_i}$ towards the viewpoint. This whole process results in what is seen in figure \ref{fig:Normals}.
 			
-		\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.7\linewidth]{Includes/images/Normals}
-		\caption{Normals calculated over a cut down section of a point cloud}
-		\label{fig:Normals}
-		\end{figure}
+			\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.7\linewidth]{Includes/images/Normals}
+			\caption{Normals calculated over a cut down section of a point cloud (the roof has been removed for ease of viewing)}
+			\label{fig:Normals}
+			\end{figure}
 
 				
 	\subsection{Region Growing}
@@ -87,9 +87,17 @@
 		
 	\end{itemize}
 	
-	This is repeated while the list of available points is not empty.\\
-	\\	
+	This is repeated while the list of available points is not empty.
+	
 	If after a seed point has been through the process and the number of points does not reach the user defined minimum size, the region removed from the cloud as unclassified. Unclassified points are removed from the cloud completely after the process is terminated.
+	
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{Includes/images/GrownRegions}
+	\caption{Red Points represent unclassified points}
+	\label{fig:GrownRegions}
+	\end{figure}
+			
 		
 	
 \section{Surface Extraction}

@@ -30,6 +30,8 @@
 		
 		Region growing needs two things; first, seed points based on their curvature values, and secondly criteria in which to extend these points into regions.
 		
+		Common criteria include, Colour and normal direction.
+		
 		There are several methods for doing these two things as described by \cite{hoover_experimental_1996}.		
 		
 		\cite{rabbani_segmentation_2006} proposed the idea of adding a smoothness constraint which finds smoothly connected areas in the point cloud. The method they propose requires a small number of parameters which provide a trade off between over and under segmentation. It is this refined algorithm that point cloud library uses in as its default region growing.

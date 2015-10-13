@@ -54,40 +54,44 @@
 			\begin{equation}
 			C \vec{v_j} = \lambda_j \vec{v_j}
 			\end{equation}
-			After solving the system and getting results for $\lambda_j$ and $\vec{v_j}$, the smallest eigenvalue and its corresponding eigenvector is selected as the normal to the point set.\\
+			After solving the system and getting results for $\lambda_j$ and $\vec{v_j}$, the smallest eigenvalue and its corresponding eigenvector is are as the normal $\vec{n_i}$ for that point.\\
 			\\
 			\\
-			There is no mathematical method for determining the sign of the normal, its orientation as computed in the PCA is ambiguous, and not consistently orientated over the whole point cloud. 
+			There is no mathematical method for determining the sign of the normal, its orientation as computed in the PCA is ambiguous, and not consistent over the whole point cloud. 
 			
-			The solution to this issue is simple. If the viewpoint is known, in the case of laser scans it is as the scan center, then orientate all normals $\vec{n_i}$ towards the viewpoint.
+			The solution to this issue is simple. If the viewpoint is known, in the case of laser scans the scan center, then orientate all normals $\vec{n_i}$ towards the viewpoint. This whole process results in what is seen in figure \ref{fig:Normals}
+			
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Includes/images/Normals}
+		\caption{Normals calculated over a cut down section of a point cloud}
+		\label{fig:Normals}
+		\end{figure}
 
 				
 	\subsection{Region Growing}
-	%mention colour based region grwoing
 	
-		Point Cloud Libraries region growing algorithm starts off by calculating the curvature for each point then sorting all points by their curvature value. this is because the point with the least curvature associated with it is located in the flattest section of the point cloud. Once the cloud is sorted the region growing part of the algorithm begins:
+	Once the normals have been calculated a region growing algorithm is executed.
+	
+	The Region growing algorithm starts off by selecting seed points. This is done by calculating the curvature of each point then storing all the points in an array, sorted by their curvature value. The reason for this is because the point with the least curvature associated with it is located in the flattest section of the point cloud. Now regions can begin to be grown using the flattest points in the cloud as seed points. 
+	
+	The first point in the sorted array is chosen as the first seed point:
+	
+	\begin{itemize}
 		
-		\begin{itemize}
-			\item The algorithm picks the point with the smallest curvature and adds it to a set called seeds.
-			
-			\item For every seed point the algorithm looks at all the neighbors and decides if they are part of that seeds region or not. This is done by looking at certain criteria with user specified thresholds.
-			
-			\begin{itemize}
-				\item Does the points normal deviate by more than the user specified threshold from the seed point.
-				
-				\item Does the points curvature deviate by more than the user specified threshold from the seed point.
-				
-			\end{itemize}
-			
-			\item Once no more points are found for that particular seed, or the region reached a specified maximum, the seed is removed from the set of seeds and the region as added to the global segment list. If no more seeds are in the set the process is started from the beginning again, except this time the points that have been assigned to a region are no longer available to be seed points or to become part of a region.
-			
-		\end{itemize}
+		\item The nearest neighbors to this point are looked at and are either rejected or accepted into the region based on user defined criteria such as normal deviation and smoothness and curvature constraints.
 		
-		If after a seed point has been through the process and the number of points does not reach the user defined minimum size the whole region removed from the cloud as unclassified and will inevitably be removed by the user.
+		\item Once a point is accepted into the region, the process starts again based on that point.
+		
+		\item Once no more points are found for that particular seed, or the region reached a specified maximum, the seed is removed from the set of seeds and the region is added to the global segment list. 
+		
+	\end{itemize}
+	
+	This is repeated while the list of available points is not empty.\\
+	\\	
+	If after a seed point has been through the process and the number of points does not reach the user defined minimum size, the region removed from the cloud as unclassified. Unclassified points are removed from the cloud completely after the process is terminated.
 		
 	
-
-
 \section{Surface Extraction}
 		
 		\subsection{Segment selection}

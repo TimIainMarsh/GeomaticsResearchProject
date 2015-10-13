@@ -17,28 +17,49 @@
 	\subsection{Principal Components Analysis}
 		A Principal Components Analysis (PCA) is the default method for estimating normals in Point Cloud Library. it is the fastest method because of PCL's multi-threading option for the function.
 		
-		The normal estimation function is simply reduced to an analysis of the eigenvectors and eigenvalues of a covariance matrix of the nearest neighbors of the point.
+		A principal components analysis can be thought of as fitting an \textit{n}-dimensional ellipse to a set of data. Each axis of the ellipse represents a principal component. If an axis is large then the variance along that axis is large, and vice versa. When calculating the normal of a point set, the smallest axis is the axis with with the least variance and therefore represents the normal. This is easy to think of with a 2D disk of points, like in figure \ref{fig:PCA2D Example}. Its easy to see how the 3rd axis for these set of point will be coming out of the page, as it has to be orthogonal to the other two.
 		
 		\begin{figure}[H]
 			\centering
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{Includes/images/pca1}
-				\caption{}
+
 				\label{fig:sub1}
 			\end{subfigure}%
 			\begin{subfigure}{.5\textwidth}
 				\centering
-				\includegraphics[width=1\linewidth]{Includes/images/pca2}
-				\caption{}
+				\includegraphics[width=1\linewidth]{Includes/images/pca2-ver2}
+
 				\label{fig:sub2}
 			\end{subfigure}
-			\caption{PCA}
-			\label{fig:test}
+			\caption{A 2D representation of a Principal Components Analysis }
+			\label{fig:PCA2D Example}
 		\end{figure} 
-
- 
-
+		
+		To fit this \textit{n}-dimensional ellipse we compute the covariance matrix of the data set and calculate the eigenvalues and corresponding eigenvectors of this covariance matrix.
+		
+		\subsubsection{Calculating the Covariance Matrix of a given set of 3D points}
+			The covariance matrix, $C$, is calculated for each point $p_i$ as follows:
+			
+			\begin{equation}
+			C = \frac{1}{k} \sum_{i=1}^{k}.(p_i - \bar{p}).(p_i - \bar{p})^T
+			\end{equation}
+			
+			Where $k$ is the number of points in the neighborhood of point $p_i$, and $\bar{p}$ is the 3D centroid of the nearest neighbors.
+				
+		\subsubsection{Calculating Eigenvalues and Eigenvectors}
+			Eigenvalues, $\lambda_j$, and eigenvectors, $\vec{v_j}$, are calculated on the covariance matrix, $C$, for a given point:
+			
+			\begin{equation}
+			C \vec{v_j} = \lambda_j \vec{v_j}
+			\end{equation}
+			After solving the system and getting results for $\lambda_j$ and $\vec{v_j}$, the smallest eigenvalue and its corresponding eigenvector is selected as the normal to the point set.\\
+			\\
+			\\
+			There is no mathematical method for determining the sign of the normal, its orientation as computed in the PCA is ambiguous, and not consistently orientated over the whole point cloud. 
+			
+			The solution to this issue is simple. If the viewpoint is known, in the case of laser scans it is as the scan center, then orientate all normals $\vec{n_i}$ towards the viewpoint.
 
 				
 	\subsection{Region Growing}

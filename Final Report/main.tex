@@ -1,10 +1,22 @@
 \documentclass[12pt,a4paper]{report}
 \usepackage[latin1]{inputenc}
+
 \usepackage{amsmath}
+\usepackage{mathtools}
+
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{float}
+
+\usepackage{listings}
+
+\lstset{
+	basicstyle=\ttfamily\footnotesize,
+	xleftmargin=3.4pt,
+	xrightmargin=3.4pt,
+	breaklines=true
+}
 
 \usepackage{caption}
 \usepackage{subcaption}
@@ -42,9 +54,6 @@
 	\setcounter{page}{1}
 	\pagenumbering{arabic}
 	
-
-	
-
 	\include{Includes/Introduction}
 
 
@@ -59,11 +68,10 @@
 	
 	\include{Includes/Conclusions}
 
-
-	\include{Includes/References}
-
 	
 	\include{Includes/appendix}
 
 
+	\include{Includes/References}
+	
 \end{document}

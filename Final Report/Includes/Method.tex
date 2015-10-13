@@ -169,17 +169,52 @@
 			
 			A pseudo-code algorithm for RANSAC can be found in appendix A.
 		\subsection{Segment selection}
-
+			The vector of segments created in the segmentation section of the program is not entirely useful due to the fact that it contains segments all the segments.
+			
+			Most of the segments are small cluttering objects, like sides of desks of tops of tables. In process of trying to extract the boundaries of a room all this clutter is unnecessary, so we need to filter it out somehow.
 			
 			\subsubsection{filtering out Horizontal and Vertical surfaces}
-				The vector of segments created in the segmentation section of the program is not entirely useful because \\
-				\\
-				fit plane\\
-			\\
-				Once a plane has been fitted to the segment the normal to that segment is said to be the coefficients $a$, $b$, and $c$ of the plane equation.\\
-				\\
-				split based on orientation
-			
+				To start this process, the vector of segments is split up into two separate vectors, horizontal segments and vertical segments. This is done by iterating through the segments and deciding which category they fall under.
+				
+				By fitting a plane to the segment using the RANSAC method outlined above we can determine its orientation from the coefficients $a$, $b$, and $c$ of the planes equation.
+				
+				\begin{equation}
+				ax + by + cz = d  \quad\quad
+				\vec{n}_{segment} = \begin{bmatrix}a\\b\\c\end{bmatrix}
+				\end{equation}
+				
+				So with the normal of the segment determined we can compare it to a vector that runs parallel to the Z axis. The obvious choice of a vertical vector is:
+				
+				\begin{equation}
+				\vec{v} = \begin{bmatrix}0\\0\\1\end{bmatrix}
+				\end{equation}
+				
+				Then to get the angle between the two vectors we take the dot product:
+				
+				\begin{equation}
+				\vec{n}_{segment}\cdot \vec{v} = \norm{\vec{n}_{segment}} \norm{\vec{v}} cos \theta
+				\end{equation}
+				
+				Solving for $\theta$ gives us the angle between the segment and vertical. From here it is easy to decide if a segment is horizontal or vertical, by seeing if $\theta$ is closer to 0\textdegree or 90\textdegree.
+				
+				Due to the unpredictable direction of the normal vector, $\theta$ must be normalized so that it falls between 0\textdegree and 90\textdegree simply put in code:\\
+				
+
+\begin{lstlisting}
+
+if(angleOfSegment > 90.0){
+	angleOfSegment = 180 -angleOfSegment
+}
+
+\\Then classify based on angle
+
+if (angleOfSegment >= 45.0){
+	Hor_Segments.push_back(current_segment);
+}
+else{
+	Vert_Segments.push_back(current_segment);
+} 
+\end{lstlisting}
 
 
 

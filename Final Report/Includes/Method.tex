@@ -195,27 +195,10 @@
 				\vec{n}_{segment}\cdot \vec{v} = \norm{\vec{n}_{segment}} \norm{\vec{v}} cos \theta
 				\end{equation}
 				
-				Solving for $\theta$ gives us the angle between the segment and vertical. From here it is easy to decide if a segment is horizontal or vertical, by seeing if $\theta$ is closer to 0\textdegree or 90\textdegree.
-				
-				Due to the unpredictable direction of the normal vector, $\theta$ must be normalized so that it falls between 0\textdegree and 90\textdegree simply put in code:\\
-				
+				Solving for $\theta$ gives us the angle between the segment and vertical. From here it is easy to decide if a segment is horizontal or vertical, by seeing if $\theta$ is closer to 0\textdegree/180\textdegree or 90\textdegree.
 
-\begin{lstlisting}
-
-if(angleOfSegment > 90.0){
-	angleOfSegment = 180 -angleOfSegment
-}
-
-\\Then classify based on angle
-
-if (angleOfSegment >= 45.0){
-	Hor_Segments.push_back(current_segment);
-}
-else{
-	Vert_Segments.push_back(current_segment);
-} 
-\end{lstlisting}
-
+		\subsubsection{Selection of Vertical Segments}
+			
 
 
 \section{Model Generation}

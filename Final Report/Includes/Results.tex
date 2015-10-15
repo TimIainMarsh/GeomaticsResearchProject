@@ -1,4 +1,58 @@
 \chapter{Results}
 
 
-Results Here
+
+
+
+
+
+
+
+	\subsection{Segment selection}
+		The vector of segments created in the segmentation section of the program is not entirely useful due to the fact that it contains segments all the segments.
+		
+		Most of the segments are small cluttering objects, like sides of desks of tops of tables. In process of trying to extract the boundaries of a room all this clutter is unnecessary, so we need to filter it out somehow.
+		\subsubsection{filtering out Horizontal and Vertical surfaces}
+			To start this process, the vector of segments is split up into two separate vectors, horizontal segments and vertical segments. This is done by iterating through the segments and deciding which category they fall under.
+			
+			By fitting a plane to the segment using the RANSAC method outlined above we can determine its orientation from the coefficients $a$, $b$, and $c$ of the planes equation.
+			
+			\begin{equation}
+			ax + by + cz = d  \quad\quad
+			\vec{n}_{segment} = \begin{bmatrix}a\\b\\c\end{bmatrix}
+			\end{equation}
+			
+			So with the normal of the segment determined we can compare it to a vector that runs parallel to the Z axis. The obvious choice of a vertical vector is:
+			
+			\begin{equation}
+			\vec{v} = \begin{bmatrix}0\\0\\1\end{bmatrix}
+			\end{equation}
+			
+			Then to get the angle between the two vectors we take the dot product:
+			
+			\begin{equation}
+			\vec{n}_{segment}\cdot \vec{v} = \norm{\vec{n}_{segment}} \norm{\vec{v}} cos \theta
+			\end{equation}
+			
+			Solving for $\theta$ gives us the angle between the segment and vertical. From here it is easy to decide if a segment is horizontal or vertical, by seeing if $\theta$ is closer to 0\textdegree/180\textdegree or 90\textdegree.
+			
+		\subsubsection{Selection of Vertical Segments}
+			
+			The vertical extent of the segment is determined by finding the highest and lowest points and getting the distance between them:
+			
+			\begin{equation}
+			Vertical \: Extent = \sqrt{(x_{max} - x_{min})^2+(y_{max} - y_{min})^2+(z_{max} - z_{min})^2}
+			\end{equation}
+			
+			If the vertical extent of a segment is less that 1m, it is safe to assume that the segment does not make up part of the walls of the room.\\
+			\\
+			The process of finding the highest and lowest points in a segment is simply a loop through all the points keeping the points with the highest and lowest z values.\\
+			\\
+			The selection based on Angle is simply an extension of the previous method for splitting the the segments based on orientation, but with a much more strict angle defining vertical, $\theta$ must fall within $\pm 10\textdegree$ of 90\textdegree:
+			
+			\begin{equation}
+			80\textdegree < \theta < 100\textdegree
+			\end{equation}
+			
+			
+					

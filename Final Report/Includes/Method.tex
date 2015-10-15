@@ -70,10 +70,8 @@
 
 				
 	\subsection{Region Growing}
-	
-		Once the normals have been calculated a region growing algorithm is executed.
 		
-		The Region growing algorithm starts off by selecting seed points. This is done by calculating the curvature of each point then storing all the points in an array, sorted by their curvature value. The reason for this is because the point with the least curvature associated with it is located in the flattest section of the point cloud. Now regions can begin to be grown using the flattest points in the cloud as seed points. 
+		A Region growing algorithm starts off by selecting seed points. This is done by calculating the curvature of each point then storing all the points in an array, sorted by their curvature value. The reason for this is because the point with the least curvature associated with it is located in the flattest section of the point cloud. Now regions can begin to be grown using the flattest points in the cloud as seed points. 
 		
 		The first point in the sorted array is chosen as the first seed point:
 		
@@ -108,9 +106,6 @@
 			\label{fig:RG-noUnclass}
 		\end{figure}
 		
-		
-		It is important to note that for the application of this paper the segments have to be planar, therefore very strict parameters were used to make sure that the segments did not have curvature in them.\\
-		\\
 		A pseudo-code algorithm for region growing can be found in appendix A.
 		
 	
@@ -137,77 +132,84 @@
 			\end{enumerate}
 			
 			This process is repeated a fixed number of times, each time either rejecting the model if there are too few inliers, or replacing the last saved model if the error is lower.
+			
+			
 			\subsubsection{Choosing number of iterations in RANSAC method}
-			$k$ (the number of iterations) required for a successful estimation within a certain probability can be calculated:
+				$k$ (the number of iterations) required for a successful estimation within a certain probability can be calculated:
+				
+				\begin{equation}
+					k = \frac{\log(1-p)}{\log(1- w^n)}
+				\end{equation}
+				
+				Where P(success) = $p$ and P(Selecting an inlier) = $w$ and $n$ = the points that are needed to create the initially estimated model(in 3D case of plane fitting $n = 3$)\\
+				\\
+				$w$ is usually not known but a rough estimate can be found.\\
+				\\
+				Below is a 2D representation of RANSAC with a line.
 			
-			\begin{equation}
-				k = \frac{\log(1-p)}{\log(1- w^n)}
-			\end{equation}
+				\begin{figure}[H]
+					\centering
+					\begin{subfigure}{.5\textwidth}
+						\centering
+						\includegraphics[width=1\linewidth]{Includes/images/random_sample_example1}
+						\label{fig:RANSAC1}
+					\end{subfigure}%
+					\begin{subfigure}{.5\textwidth}
+						\centering
+						\includegraphics[width=1\linewidth]{Includes/images/random_sample_example2}
+						\label{fig:RANSAC2}
+					\end{subfigure}
+					\caption{A 2D representation of RANSAC showing inliers in blue and outliers in red}
+				\end{figure} 
+			 
+				
+				A pseudo-code algorithm for RANSAC can be found in appendix A.
+		\subsection{Segment selection}
+			Segment selection is the process of filtering out useful segments and removing segments that add nothing to the final result. The process of deciding which segments to keep and which ones to remove is simple, segments are kept or rejected on the basis of 2 criteria:
 			
-			where P(success) = $p$ and P(Selecting an inlier) = $w$ and $n$ = the points that are needed to create the initially estimated model(in 3D case of plane fitting $n = 3$)\\
-			\\
-			$w$ is usually not known but a rough estimate can be found.\\
-			\\
+			\begin{description}
+				\item[Vertical Extent] - The  difference between the highest and lowest points in the segment
+				\item[Angle from vertical] - The angle between the segment and vertical.
+			\end{description}
 			
-			Below is a 
+			Once The filtering has taken place only big planar segments that represent the extents of the room are left.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.7\linewidth]{"Includes/images/Selected segments"}
+				\caption{Selected segments}
+				\label{fig:Selectedsegments}
+			\end{figure}
+			
 		
+\newpage
+\section{Model Generation}
+		\subsection{Bounding Box Generation}
+			There are two types of Bounding boxes:
+			
 			\begin{figure}[H]
 				\centering
 				\begin{subfigure}{.5\textwidth}
 					\centering
-					\includegraphics[width=1\linewidth]{Includes/images/random_sample_example1}
-					\label{fig:RANSAC1}
+					\fbox{\includegraphics[width=0.7\linewidth]{Includes/images/Axis-Aligned}}
+					\caption{AABB}
+					\label{fig:AABB}
 				\end{subfigure}%
 				\begin{subfigure}{.5\textwidth}
 					\centering
-					\includegraphics[width=1\linewidth]{Includes/images/random_sample_example2}
-					\label{fig:RANSAC2}
+					\fbox{\includegraphics[width=0.7\linewidth]{"Includes/images/Orienrted Bounding box"}}
+					\caption{OBB}
+					\label{fig:OBB}
 				\end{subfigure}
-				\caption{A 2D representation of RANSAC showing inliers in blue and outliers in red}
-			\end{figure} 
-		 
+				\caption{(a) an Axis-Aligned Bounding Box, (b) an Oriented Bounding Box}
+			\end{figure}
 			
-			A pseudo-code algorithm for RANSAC can be found in appendix A.
-		\subsection{Segment selection}
-			The vector of segments created in the segmentation section of the program is not entirely useful due to the fact that it contains segments all the segments.
+			\subsubsection{Creating an Axis Aligned Bounding Box}
+			An axis Aligned Bounding Box is an easy thing to create, get max $x,y,z$ and min $x,y,z$  and set them as max and min of the box.
 			
-			Most of the segments are small cluttering objects, like sides of desks of tops of tables. In process of trying to extract the boundaries of a room all this clutter is unnecessary, so we need to filter it out somehow.
-			
-			\subsubsection{filtering out Horizontal and Vertical surfaces}
-				To start this process, the vector of segments is split up into two separate vectors, horizontal segments and vertical segments. This is done by iterating through the segments and deciding which category they fall under.
-				
-				By fitting a plane to the segment using the RANSAC method outlined above we can determine its orientation from the coefficients $a$, $b$, and $c$ of the planes equation.
-				
-				\begin{equation}
-				ax + by + cz = d  \quad\quad
-				\vec{n}_{segment} = \begin{bmatrix}a\\b\\c\end{bmatrix}
-				\end{equation}
-				
-				So with the normal of the segment determined we can compare it to a vector that runs parallel to the Z axis. The obvious choice of a vertical vector is:
-				
-				\begin{equation}
-				\vec{v} = \begin{bmatrix}0\\0\\1\end{bmatrix}
-				\end{equation}
-				
-				Then to get the angle between the two vectors we take the dot product:
-				
-				\begin{equation}
-				\vec{n}_{segment}\cdot \vec{v} = \norm{\vec{n}_{segment}} \norm{\vec{v}} cos \theta
-				\end{equation}
-				
-				Solving for $\theta$ gives us the angle between the segment and vertical. From here it is easy to decide if a segment is horizontal or vertical, by seeing if $\theta$ is closer to 0\textdegree/180\textdegree or 90\textdegree.
+			\subsubsection{Creating an Oriented bounding Box}
 
-		\subsubsection{Selection of Vertical Segments}
-			
-
-
-\section{Model Generation}
-		\subsection{Bounding Box Generation}
-		OBB
-		Moment of inertia
-		
-		\subsection{Angle between Planes}
-		
+				
 		\subsection{Plane with Plane Intersection}
 		
 		\subsection{Orthogonal Distance of point to line}

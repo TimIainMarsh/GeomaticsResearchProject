@@ -23,13 +23,13 @@
 			\centering
 			\begin{subfigure}{.5\textwidth}
 				\centering
-				\includegraphics[width=1\linewidth]{Includes/images/pca1}
+				\includegraphics[width=0.6\linewidth]{Includes/images/pca1}
 
 				\label{fig:sub1}
 			\end{subfigure}%
 			\begin{subfigure}{.5\textwidth}
 				\centering
-				\includegraphics[width=1\linewidth]{Includes/images/pca2-ver2}
+				\includegraphics[width=0.6\linewidth]{Includes/images/pca2}
 
 				\label{fig:sub2}
 			\end{subfigure}
@@ -115,13 +115,14 @@
 	To begin this, a vector of the segments is created after the region growing has taken place.
 	
 		\subsection{Random Sample Consensus}
+		\label{RANSAC expl}
 			When looking at an individual segment the calculated normals no longer have any relevance, it becomes necessary to stop looking at the points that make up a segment and rather look at the segment as a whole. 
 			
 			For this Random Sample consensus (RANSAC) is used to estimate a normal to the segment by fitting a plane to it.
 			
 			RANSAC achieves this goal by iteratively selecting a random subset of the original data, this subset of the original data is considered inliers. A model is fitted and the hypothesis that this is the correct model is then tested as follows:
 			
-			\begin{enumerate}
+			\begin{itemize}
 				\item All other data is then tested against this model, if a point fits well it is considered a hypothetical inlier.
 				
 				\item The model is considered a reasonably good fit if enough points are considered inliers.
@@ -129,7 +130,7 @@
 				\item The model is then re-estimated from all hypothetical inliers, as opposed to only the initial set.
 				
 				\item Then finally the model is evaluated by calculating the error of all the points relative to the model.
-			\end{enumerate}
+			\end{itemize}
 			
 			This process is repeated a fixed number of times, each time either rejecting the model if there are too few inliers, or replacing the last saved model if the error is lower.
 			
@@ -174,49 +175,116 @@
 			
 			Once The filtering has taken place only big planar segments that represent the extents of the room are left.
 			
-			\begin{figure}[H]
-				\centering
-				\includegraphics[width=0.7\linewidth]{"Includes/images/Selected segments"}
-				\caption{Selected segments}
-				\label{fig:Selectedsegments}
-			\end{figure}
-			
 		
 \newpage
 \section{Model Generation}
-		\subsection{Bounding Box Generation}
-			There are two types of Bounding boxes:
-			
-			\begin{figure}[H]
+	\subsection{Bounding Box Generation}
+		There are two types of Bounding boxes:
+		
+		\begin{figure}[H]
+			\centering
+			\begin{subfigure}{.5\textwidth}
 				\centering
-				\begin{subfigure}{.5\textwidth}
-					\centering
-					\fbox{\includegraphics[width=0.7\linewidth]{Includes/images/Axis-Aligned}}
-					\caption{AABB}
-					\label{fig:AABB}
-				\end{subfigure}%
-				\begin{subfigure}{.5\textwidth}
-					\centering
-					\fbox{\includegraphics[width=0.7\linewidth]{"Includes/images/Orienrted Bounding box"}}
-					\caption{OBB}
-					\label{fig:OBB}
-				\end{subfigure}
-				\caption{(a) an Axis-Aligned Bounding Box, (b) an Oriented Bounding Box}
-			\end{figure}
-			
-			\subsubsection{Creating an Axis Aligned Bounding Box}
-			An axis Aligned Bounding Box is an easy thing to create, get max $x,y,z$ and min $x,y,z$  and set them as max and min of the box.
-			
-			\subsubsection{Creating an Oriented bounding Box}
-
+				\includegraphics[width=0.7\linewidth]{Includes/images/Axis-Aligned}
+				\caption{AABB}
+				\label{fig:AABB}
+			\end{subfigure}%
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=0.7\linewidth]{"Includes/images/Orienrted Bounding box"}
+				\caption{OBB}
+				\label{fig:OBB}
+			\end{subfigure}
+			\caption{(a) an Axis-Aligned Bounding Box, (b) an Oriented Bounding Box}
+		\end{figure}
+		
+		\subsubsection{Creating an Axis Aligned Bounding Box}
+			An axis Aligned Bounding Box is created through a simple maximum and minimum process.
+			Extract the maximum $x,y,z$ points in the set as well as the minimum $x,y,z$ points and use them to create a box around the point set.
+		
+		\subsubsection{Creating an Oriented bounding Box}
+			Creating an object oriented bounding box is a 6 step process.
+			\begin{description}
+				\item[Step 1] Compute 3D centroid and the covariance matrix of the point set
+									
+				\item[Step 2] Extract the eigenvectors of the covariance matrix. These eigenvectors represent the orientation of the OBB
 				
-		\subsection{Plane with Plane Intersection}
+				\item[Step 3] Calculate the transformation parameters between the eigenvectors and the $x,y,z$ axes.
+				
+				\item[Step 4] Use these parameters to transform the point set to the $x,y,z$ axes.
+				
+				\item[Step 5] Fit a normal AABB to the point set.
+				
+				\item[Step 6] Transform the point set as well as the calculated AABB back to their original positions. The AABB not becomes an oriented bounding box.
+			\end{description}
+			
+	\subsection{Plane with Plane Intersection}
+	
+	The fitting of planes to segments as spoken about in Section \ref{RANSAC expl} is a precursor to finding the intersection line of planar segments. Once a plane has been fitted to each segment, finding the line of intersection is simple 3D geometry.
+	
+	The intersection of two planes with the equations $a_1x + b_1y + c_1z = d_1$ and $a_2x + b_2y + c_2z = d_2$ will result in a parameterized line, $L$, with the form $L = L_0 + t\vec{u}$ where $\vec{u}$ is the direction vector of the line and $L_0$ is a point on the line.
+	
+	The direction of the line of intersection is the cross product of the two plane normals. Given:
+	
+	$\vec{n_1} = \begin{bmatrix}a_1\\b_1\\c_1\end{bmatrix}$  And $\vec{n_2} = \begin{bmatrix}a_2\\b_2\\c_2\end{bmatrix}$\\
+	\\
+	then $\vec{u}$  =  $\vec{n_1} \times \vec{n_2}  $.\\
+	\\
+	After calculating $\vec{u}$, to fully define the line, a specific point on it must be found.
+	
+	That is, we need to find the point $L_0 = (L_x,\:L_y,\:L_z)$. There are 4 methods to do this:
+	\begin{enumerate}
+	\item Through a direct linear equation, this method however requires a user to set either a variable to zero. This is not practical.
+	
+	\item By creating a third plane and intersecting the 3 planes to to get a point.
+	
+	\item by creating a line on one of the planes and intersecting the line with the other plane. 
+	
+	\item Construct system of equations using Lagrange multipliers with one objective function and two constraints. This is the method that Point cloud library uses.
+	\end{enumerate}
+	
+	Through some derivation using Lagrange multipliers a system of equations is formed:
+	
+	
+	\[
+	\begin{bmatrix}
+	2 & 0 & 0 & a_1 & a_2 \\
+	0 & 2 & 0 & b_1 & b_2 \\
+	0 & 0 & 2 & c_1 & c_2 \\
+	a_1 & b_1 & c_1 & 0 & 0 \\
+	a_2 & b_2 & c_2 & 0 & 0
+	\end{bmatrix}
+	b=
+	\begin{bmatrix}
+	0 \\
+	0\\
+	0 \\
+	-d_1 \\
+	-d_2 
+	\end{bmatrix}
+	\]
+	
+	\[
+	where\: b = 	\begin{bmatrix}
+		L_x \\
+		L_y\\
+		L_z \\
+		\lambda \\
+		\mu 
+	\end{bmatrix}
+	\]
+	\newline
+	\newline
+	From this we have the equation of the line, $L = L_0 + t\vec{u}$.
+	
+	\subsection{Orthogonal Distance of point to line}
+	
+	yay...
+	
+	\subsection{Project points onto line}
+	
+	\subsection{Create OBJ file}
 		
-		\subsection{Orthogonal Distance of point to line}
-		
-		\subsection{Project points onto line}
-		
-		\subsection{Create OBJ file}
 
 	
 

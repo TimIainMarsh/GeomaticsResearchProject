@@ -198,6 +198,10 @@
 			\caption{(a) an Axis-Aligned Bounding Box, (b) an Oriented Bounding Box}
 		\end{figure}
 		
+		An Axis-Aligned bounding Box is a 3-dimensional box, containing all the points in a point set, aligned with the $x,y,z$ axes of the 3-dimensional Cartesian space of the point set.\\
+		
+		An Oriented Bounding Box is a 3-dimensional box, containing all the points in a point set, aligned with the principal components of the point set.
+		
 		\subsubsection{Creating an Axis Aligned Bounding Box}
 			An axis Aligned Bounding Box is created through a simple maximum and minimum process.
 			Extract the maximum $x,y,z$ points in the set as well as the minimum $x,y,z$ points and use them to create a box around the point set.
@@ -232,7 +236,7 @@
 	\\
 	After calculating $\vec{u}$, to fully define the line, a specific point on it must be found.
 	
-	That is, we need to find the point $L_0 = (L_x,\:L_y,\:L_z)$. There are 4 methods to do this:
+	That is, we need to find the point $L_0 = (x_L,\:y_L,\:z_L)$. There are 4 methods to do this:
 	\begin{enumerate}
 	\item Through a direct linear equation, this method however requires a user to set either a variable to zero. This is not practical.
 	
@@ -266,22 +270,72 @@
 	
 	\[
 	where\: b = 	\begin{bmatrix}
-		L_x \\
-		L_y\\
-		L_z \\
+		x_L \\
+		y_L\\
+		z_L \\
 		\lambda \\
 		\mu 
 	\end{bmatrix}
 	\]
 	\newline
 	\newline
-	From this we have the equation of the line, $L = L_0 + t\vec{u}$.
+	From this we have the equation of the line, $L = \begin{bmatrix}
+	x_L \\
+	y_L\\
+	z_L 
+	\end{bmatrix} + t\vec{u}$.
 	
 	\subsection{Orthogonal Distance of point to line}
 	
-	yay...
+	The distance from a point to a line is reasonably ambiguous as it could be to any point on the line. The orthogonal distance to a line is not ambiguous. It is the shortest distance from the point to the line.
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{"Includes/images/OrthogDist to line"}
+		\caption{}
+		\label{fig:OrthogDisttoline}
+	\end{figure}
+	
+	A line in 3-dimensions can be represented by 2 points, $\vec{x}_1 = (x_1,y_1,z_1)$ and $\vec{x}_2 = (x_2,y_2,z_2)$ giving:\\
+	
+	\begin{equation}
+	L = \begin{bmatrix}
+	x_1 \\
+	y_1\\
+	z_1 
+	\end{bmatrix} + \begin{bmatrix}
+	x_2 - x_1 \\
+	y_2 - y_1\\
+	z_2 - z_1
+	\end{bmatrix}t
+	\end{equation}
+	
+	\noindent The squared distance from point $X_0$ and a point on the line with parameter $t$ is therefore:
+	\begin{equation}\label{d^2}
+	d^2 = [(x_1 - x_0) + (x_2 - x_1)t]^2 + [(y_1 - y_0) + (y_2 - y_1)t]^2  + [(x_1 - z_0) + (z_2 - z_1)t]^2 
+	\end{equation}
+
+	\noindent To minimize the distance, set $d(d^2)/dt = 0$ and solve for $t$ to obtain:
+	
+	\begin{equation}
+	t = - \frac{(\vec{x_1} - \vec{x_0}) \cdot (\vec{x_2} - \vec{x_1})  }{\norm{(\vec{x_2} - \vec{x_1})}^2}
+	\end{equation}
+	
+	The minimum distance can then be found by plugging $t$ back into equation \ref{d^2} and simplifying to obtain:
+	
+	\begin{equation}
+	d^2 = \frac{ \norm{ (\vec{x_2} - \vec{x_1}) \times (\vec{x_1} - \vec{x_0})}^2  }{\norm{(\vec{x_2} - \vec{x_1})}^2}
+	\end{equation}
+	
+	and taking the square root of both sides results in:
+	
+	\begin{equation}
+	d = \frac{ \norm{ (\vec{x_0} - \vec{x_1}) \times (\vec{x_0} - \vec{x_2})}}{\norm{(\vec{x_2} - \vec{x_1})}}
+	\end{equation}
+
 	\subsection{Project points onto line}
+	
+	
 	
 	\subsection{Create OBJ file}
 		

@@ -78,11 +78,37 @@
 
 	
 \section{Optimization}
+	\subsection{Data storage}
 	
-	\subsection{K-d tree}
-	In computer science trees are a widely used data structure or abstract data type. In the context of this paper they are used for creating a search-able data structure to make searching for nearest neighbors faster.
-	
-	A K-d tree is a space partitioning data structure used for structuring unorganized points. a K-d tree is a structure designed specifically for multi dimensional situations, hence the name k-dimensional tree, where k is the dimension of the search space. The advantage of this data type is that is can handle many different types of queries very efficiently \citep{bentley_multidimensional_1975}.
+		\subsubsection{Point Cloud Data file format}
+			The PCD file format is a file format was created by Point Cloud Library (PCL) for the storage of point cloud files used with their library. PCD is not the only format for storage of point clouds but has been created to offer greater flexibility and speed to reading and writing files.
+			
+			There are two different storage modes of PCD, ASCII form, essentially just plain text with each point on new line separated with a space. And binary form where the data written to the file ia a complete copy of the pcl::PointCloud.points array/vector.
+			
+			The ASCII style of storage makes the cloud usable in other point cloud applications, and is readable and editable by a user in simple text viewers.
+			
+			The advantages of PCD over other file formats is:
+			\begin{itemize}
+				\item  The ability to store and process organized point cloud datasets - this is of extreme importance for real time applications, and research areas such as augmented reality, robotics, etc
+				
+				\item binary $mmap/munmap$ data types are the fastest possible way of loading and saving data to disk
+				
+				\item storing different data types (all primitives supported: char, short, int, float, double) allows the point cloud data to be flexible and efficient with respect to storage and processing.
+				
+				\item n-D histograms for feature descriptors - very important for 3D perception/computer vision applications.
+			\end{itemize}
+			
+			Another advantage is that by controlling the file format, PCL can adapt it to best suit PCL libraries.
+		
+		\subsubsection{K-d tree}
+			In computer science trees are a widely used data structure or abstract data type. In the context of this research paper they are used for creating a search-able data structure to make searching for nearest neighbors faster.
+			
+			A K-d tree is a space partitioning data structure used for structuring unorganized points. a K-d tree is a structure designed specifically for multi dimensional situations, hence the name k-dimensional tree, where k is the dimension of the search space. The advantage of this data type is that is can handle many different types of queries very efficiently \citep{bentley_multidimensional_1975}.
+		
+		
+		\subsubsection{Wavefront .obj}
+			OBJ (or .OBJ) is a geometry definition file format first developed by Wavefront Technologies
+		
 	
 	\subsection{Open Multi-Processing}
 	OpenMP is an application programming interface (API) for writing multi-threaded applications. Certain functions in Point Cloud Library have support for multi-threading using OpenMP.
@@ -91,8 +117,7 @@
 	
 	The Normal estimation class in Point Cloud Library has an OpenMP replacement that is 100\% compatible with the single-threaded function, so requires no effort to run the normal estimation up to 8 times faster depending on the number of cores the computer has to offer.
 	
-	\subsection{Data storage}
-	pcl - pcd
-	obj
-	...
+
+	
+
 	

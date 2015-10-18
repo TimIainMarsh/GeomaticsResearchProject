@@ -27,9 +27,36 @@ The point clouds are processes through an command line program that takes in the
 			\caption{$k$ = 200}
 			\label{fig:k=200}
 		\end{figure}
+		
+		Both images are done with the region growing parameters chosen in section \ref{RegionGrowParams}
 
 		
 		There is also a speed aspect to the neighbourhood size, smaller results in a much faster computation, and larger much slower. This is not a huge issue as the normal estimation function has multi-threading making it only take up to 10s at most. This is only about 5\% of the total run-time.
+		
+		
+		\subsection{Region Growing}
+		\label{RegionGrowParams}
+			
+		Once the normals have been calculated the point cloud is segmented using region growing. Region growing takes in 5 parameters; Minimum cluster size, Maximum cluster size, Number of neighbours, Smoothness threshold and Curvature threshold.
+		
+		In the case of this project bigger segments are good, so the Maximum cluster size value was never set allowing clusters be as large as the need to be.
+		
+		
+		
+		\begin{lstlisting}
+MinClusterSize = 5000;
+NumberOfNeighbours = 40;
+SmoothnessThreshold = (1.0 * M_PI / 180);
+CurvatureThreshold = 1.0;
+		\end{lstlisting}
+		
+		
+		
+			The segmentation of the point cloud is the most time consuming function in the whole process, taking up on average 80\% of total run-time.
+			
+			Once again the speed of the process depends greatly on the parameters set
+		
+		
 
 	\section{Surface Extraction}
 	

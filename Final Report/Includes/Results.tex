@@ -1,16 +1,41 @@
 \chapter{Results}
 
+The aim of this project is to create a boundary representation of an indoor environment from laser scan data. This section builds on the literature review and Method and describes the process undertaken to get a B-rep model.\\
+\\
+The point clouds are processes through an command line program that takes in the point cloud name as a parameter, then saves the B-rep model as an obj file with the same name and same file location as the point cloud.
+
+	\section{Segmentation}
+		The segmentation of the point cloud is done with a built in region growing function from Point Cloud Library. A detailed description of the region growing process is given in Section \ref{RegionGrowing}.
+		
+		\subsection{Normal Calculation}
+		
+		Before segmentation can take place normals need to be calculated for each point in the cloud. Normals are calculated using a Principal components analysis, with the neighbourhood around the point, $k$, set to the nearest 40 points. 
+		
+		40 was chosen because it gives the best results, higher and the gaps at the corners of the room start to become very big making segments smaller, as well as no co-planar features are detected for example a door will become part of the wall. Any smaller and there is too much variation in the normals making the region growing segmentation leave holes in the planar segments such as in Figure \ref{fig:k=5}:
+		
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\linewidth]{"Includes/images/Normal Comp/k = 5 ver 2"}
+			\caption{$k$ = 5}
+			\label{fig:k=5}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\linewidth]{"Includes/images/Normal Comp/k = 200 ver 2"}
+			\caption{$k$ = 200}
+			\label{fig:k=200}
+		\end{figure}
+
+		
+		There is also a speed aspect to the neighbourhood size, smaller results in a much faster computation, and larger much slower. This is not a huge issue as the normal estimation function has multi-threading making it only take up to 10s at most. This is only about 5\% of the total run-time.
 
 	\section{Surface Extraction}
+	
 	It is immediately evident in Figure \ref{fig:RG-noUnclass} that there are too many small segments that are not necessary and irreverent to the final output. So it becomes necessary to filter these segments out.
 	
 	To begin this, a vector of the segments is created after the region growing has taken place.
-
-	\subsection{Random Sample Consensus}
-			\label{RANSAC expl}
-			When looking at an individual segment the calculated normals no longer have any relevance, it becomes necessary to stop looking at the points that make up a segment and rather look at the segment as a whole. 
-
-
 
 
 	\subsection{Segment selection}
@@ -64,5 +89,10 @@
 				\caption{Selected segments}
 				\label{fig:Selectedsegments}
 			\end{figure}
+			
+	\section{Model Generation}
+	
+	
+	\section{Creating Obj file}
 			
 					

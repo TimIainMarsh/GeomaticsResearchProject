@@ -41,7 +41,23 @@ The point clouds are processes through an command line program that takes in the
 		
 		In the case of this project bigger segments are good, so the Maximum cluster size value was never set allowing clusters be as large as the need to be.
 		
+		The minimum cluster size was set to 5000 points because the chances of a significant wall section being less than 5000 points is very low, having this large number also removes a lot of the clutter in a room. Removing clutter is an important part of this project as any small segment thats not a part of the extent of the room (i.e. walls, roof or floor) will create problems with the rest of the program.
 		
+				
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\linewidth]{"Includes/images/RegionGrowing/min-size = 100"}
+			\caption{Minimum Cluster Size = 100}
+			\label{fig:min-size=100}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\linewidth]{"Includes/images/RegionGrowing/min-size = 5000"}
+			\caption{Minimum Cluster Size = 5000}
+			\label{fig:min-size=5000}
+		\end{figure}
+
 		
 		\begin{lstlisting}
 MinClusterSize = 5000;
@@ -51,7 +67,7 @@ CurvatureThreshold = 1.0;
 		\end{lstlisting}
 		
 		
-		
+	
 			The segmentation of the point cloud is the most time consuming function in the whole process, taking up on average 80\% of total run-time.
 			
 			Once again the speed of the process depends greatly on the parameters set

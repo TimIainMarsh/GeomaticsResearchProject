@@ -1,9 +1,14 @@
 \chapter{Results}
 
 
+	\section{Surface Extraction}
+	It is immediately evident in Figure \ref{fig:RG-noUnclass} that there are too many small segments that are not necessary and irreverent to the final output. So it becomes necessary to filter these segments out.
+	
+	To begin this, a vector of the segments is created after the region growing has taken place.
 
-
-
+	\subsection{Random Sample Consensus}
+			\label{RANSAC expl}
+			When looking at an individual segment the calculated normals no longer have any relevance, it becomes necessary to stop looking at the points that make up a segment and rather look at the segment as a whole. 
 
 
 

@@ -71,7 +71,7 @@
 				
 	\subsection{Region Growing}
 		
-		A Region growing algorithm starts off by selecting seed points. This is done by calculating the curvature of each point then storing all the points in an array, sorted by their curvature value. The reason for this is because the point with the least curvature associated with it is located in the flattest section of the point cloud. Now regions can begin to be grown using the flattest points in the cloud as seed points. 
+		A Region growing algorithm starts off by selecting seed points. This is done by calculating the curvature of each point then storing all the points in an array, sorted by their curvature value. The reason for this is because the point with the least curvature value is located in the flattest section of the point cloud. Now regions can begin to be grown using the flattest points in the cloud as seed points. 
 		
 		The first point in the sorted array is chosen as the first seed point:
 		
@@ -106,19 +106,16 @@
 			\label{fig:RG-noUnclass}
 		\end{figure}
 		
+		The segments are coloured randomly to make them easier to distinguish for the user.
+		
 		A pseudo-code algorithm for region growing can be found in appendix A.
 		
 	
 \section{Surface Extraction}
-	It is immediately evident in Figure \ref{fig:RG-noUnclass} that there are too many small segments that are not necessary and irreverent to the final output. So it becomes necessary to filter these segments out.
-	
-	To begin this, a vector of the segments is created after the region growing has taken place.
 	
 		\subsection{Random Sample Consensus}
 		\label{RANSAC expl}
-			When looking at an individual segment the calculated normals no longer have any relevance, it becomes necessary to stop looking at the points that make up a segment and rather look at the segment as a whole. 
-			
-			For this Random Sample consensus (RANSAC) is used to estimate a normal to the segment by fitting a plane to it.
+			Random Sample consensus (RANSAC) is used to estimate a normal to the segment by fitting a plane to it.
 			
 			RANSAC achieves this goal by iteratively selecting a random subset of the original data, this subset of the original data is considered inliers. A model is fitted and the hypothesis that this is the correct model is then tested as follows:
 			
@@ -296,9 +293,11 @@
 		\label{fig:OrthogDisttoline}
 	\end{figure}
 	
+	\noindent\cite{weisstein_point-line_????} explains it as follows:
+	
 	A line in 3-dimensions can be represented by 2 points, $\vec{x}_1 = (x_1,y_1,z_1)$ and $\vec{x}_2 = (x_2,y_2,z_2)$ giving:\\
 	
-	\begin{equation}
+	\begin{equation}\label{LineEqn}
 	L = \begin{bmatrix}
 	x_1 \\
 	y_1\\
@@ -317,7 +316,7 @@
 
 	\noindent To minimize the distance, set $d(d^2)/dt = 0$ and solve for $t$ to obtain:
 	
-	\begin{equation}
+	\begin{equation}\label{formT}
 	t = - \frac{(\vec{x_1} - \vec{x_0}) \cdot (\vec{x_2} - \vec{x_1})  }{\norm{(\vec{x_2} - \vec{x_1})}^2}
 	\end{equation}
 	
@@ -335,9 +334,60 @@
 
 	\subsection{Project points onto line}
 	
+	Projecting a point onto a line in 3-dimensional space is a similar problem to finding the orthogonal distance to a line. With the standard line equation of a line represented by two points:
+	
+	\begin{equation}\tag{\ref{LineEqn}}
+		L = \begin{bmatrix}
+		x_1 \\
+		y_1\\
+		z_1 
+		\end{bmatrix} + \begin{bmatrix}
+		x_2 - x_1 \\
+		y_2 - y_1\\
+		z_2 - z_1
+		\end{bmatrix}t
+	\end{equation}
+	
+	In both, projecting a point and orthogonal distance, cases you need to know a value for $t$. The formula for this, shown in equation \ref{formT}. Once $t$ has been calculated getting the projected point is as simple as substituting its value into equation \ref{LineEqn} and seeing the resulting $x,y,z$ point. This point is the orthogonal projection of the point onto the line.
+	
+	\subsection{Creating an OBJ file}
+	
+	Due to the fact that obj files are plain text they are easy to write in the same way as a text file, as long as the format is correct. Obj files support many different types, these types are all differentiated by using a keyword at the beginning of each line. 
+	
+	For example writing a 3 planar objects that make a small portion of a cube will result in an obj file that looks as follows:
+	\begin{lstlisting}
+	#Vertex List
+	v 0 0 0
+	v 1 0 0
+	v 1 1 0
+	v 0 1 0
+	v 1 0 1
+	v 0 0 1
+	v 0 1 1
+
+	#face list
+	o object.side.1
+	f 1 2 3 4
+	o object.side.2
+	f 1 2 5 6
+	o object.side.3
+	f 1 6 7 4
+	\end{lstlisting}
+	And results in a model that looks like this:
 	
 	
-	\subsection{Create OBJ file}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Includes/images/half-box}
+		\caption{3 side of a cube}
+		\label{fig:half-box}
+	\end{figure}
+	
+	It is also possible to save textures and colours in an obj file by creating a .mtl (material) file. In the material file colours are defined in a similar way to obj files with "ka" representing an ambient colour "kd" a diffuse colour and "ks" a specular colour. 
+	
+	A material file also offers the ability to use texture maps, which are essentially maps of what colour is where for specific objects. Texture maps are stored in a .tga file.
+	
+	
 		
 
 	

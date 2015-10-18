@@ -40,41 +40,35 @@
 		
 	
 	
-	\subsection{Surface Extraction}
-		\subsubsection{Plane fitting}
-		Another method for calculating normals is by least squares plane fitting. Least squares was created in 1805 by a French mathematician Adrien-Marie Legendre.
-		
-		Least squares is used to fit a plane to a point to get the normal of the point by taking a region around the point and fitting the plane to all those points. The process of fitting a plane to a set of points is described by \cite{schomaker_fit_1959}.
-		
+	\subsection{Surface Extraction}		
 	
 		\subsubsection{Random sample consensus}
-		Random sample consensus (RANSAC) is an iterative method used to estimate the model coefficients of a set of observed data that contains outliers. RANSAC was developed by \citeauthor{fischler_random_1981} in \citeyear{fischler_random_1981} as a way of solving the Location Determination Problem in photogrammetry and computer vision applications.
-		
-		RANSAC achieves its goal by iteratively selecting a random subset of the original data, this subset of the original data are considered inliers. A model is then fitted to the inliers (A plane or line ect). The remainder of the data set is then compared to the model if a point fits well with the model it is considered a hypothetical inlier. The model is then re-estimated from the hypothetical inliers. The model is then evaluated by the error relative to the inliers of the model.
-		
-		This process is repeated a fixed number of times, each time either rejecting the model if there are too few inliers, or replacing the last saved model if the error is lower.
+			Random sample consensus (RANSAC) is an iterative method used to estimate the model coefficients of a set of observed data that contains outliers. RANSAC was developed by \citeauthor{fischler_random_1981} in \citeyear{fischler_random_1981} as a way of solving the Location Determination Problem in photogrammetry and computer vision applications.
+			
+			RANSAC achieves its goal by iteratively selecting a random subset of the original data, this subset of the original data are considered inliers. A model is then fitted to the inliers (A plane or line ect). The remainder of the data set is then compared to the model if a point fits well with the model it is considered a hypothetical inlier. The model is then re-estimated from the hypothetical inliers. The model is then evaluated by the error relative to the inliers of the model.
+			
+			This process is repeated a fixed number of times, each time either rejecting the model if there are too few inliers, or replacing the last saved model if the error is lower.
 		
 		\subsubsection{Least Squares Plane fitting}
-			write about least squares as method of plane fitting\\
-			\\
-			-reject due to potential nosy data.. under you never know pretense..
+			Another method of fitting a plane to a set of 3-dimensional points is through least squares. Least squares itself was created in 1805 by a French mathematician Adrien-Marie Legendre.
 			
-			\cite{arun_least_1987}
+			Least squares is used to fit a plane to a point to get the normal of the point by taking a region around the point and fitting the plane to all those points. The process of fitting a plane to a set of points is described by \cite{schomaker_fit_1959}.
 			
 	
 		\subsubsection{Occlusion in Cluttered Environments}
-		In \citeyear{mura_automatic_2014} \citeauthor{mura_automatic_2014} Presented a robust approach for reconstructing the main architectural structure of complex indoor environments given laser scans of the rooms. within the paper they speak about how large vertical objects can be mistaken for a wall when they are in fact a cabinet or locker or something of that nature.
-		
-		Walls, by definition, cover the full vertical extent of a room. But when working wit laser scans this is not something that you can enforce because there is often clutter in the way so the full extent of the wall is not seen. So to deal with this \citeauthor{mura_automatic_2014} employed a simple visibility test to determine if one segment was 'in-front' of another. They cast rays from the scan center through the OBB (oriented bounding box) and set out to determine if those rays intersected any other segment. If they did the first segment obviously lies in-front of the other.
+			In \citeyear{mura_automatic_2014} \citeauthor{mura_automatic_2014} Presented a robust approach for reconstructing the main architectural structure of complex indoor environments given laser scans of the rooms. within the paper they speak about how large vertical objects can be mistaken for a wall when they are in fact a cabinet or locker or something of that nature.
+			
+			Walls, by definition, cover the full vertical extent of a room. But when working wit laser scans this is not something that you can enforce because there is often clutter in the way so the full extent of the wall is not seen. So to deal with this \citeauthor{mura_automatic_2014} employed a simple visibility test to determine if one segment was 'in-front' of another. They cast rays from the scan center through the OBB (oriented bounding box) and set out to determine if those rays intersected any other segment. If the rays do intersect another segment the first segment obviously lies in-front of the other.
 		
 	
 	\subsection{Model Generation}
 		\subsubsection{Use of Primitives in Uncluttered Environments}
-		\cite{sanchez_planar_2012} from Video and Image Processing Lab in the University of California, Berkeley, wrote a paper on planar 3D modeling of building interiors from point clouds generated by laser scanners. The scans that they used were cleaned out of noise and were not in cluttered environments.
-			
-		The method that \citeauthor{sanchez_planar_2012} proposed did not use any specific segmentation algorithm, they instead calculated the normals for each point and classified points based on the direction of their normal. From there they fit planes to represent walls. They also attempt to create stairs by looking at all the points labeled as 'remaining' and attempt to fit a predefined staircase model to the points.
-			
-		This idea could obviously be extended to any item where a primitive can be created. 
+			\cite{sanchez_planar_2012} from Video and Image Processing Lab in the University of California, Berkeley, wrote a paper on planar 3D modeling of building interiors from point clouds generated by laser scanners. The scans that they used were cleaned out of noise and were not in cluttered environments.
+				
+			The method that \citeauthor{sanchez_planar_2012} proposed did not use any specific segmentation algorithm, they instead calculated the normals for each point and classified points based on the direction of their normal. From there they fit planes to represent walls. They also attempt to create stairs by looking at all the points labeled as 'remaining' and attempt to fit a predefined staircase model to the points.
+				
+			This idea could be extended to any item where a primitive can be created. 
+
 
 	
 \section{Optimization}
@@ -98,7 +92,7 @@
 				\item n-D histograms for feature descriptors - very important for 3D perception/computer vision applications.
 			\end{itemize}
 			
-			Another advantage is that by controlling the file format, PCL can adapt it to best suit PCL libraries. \citep{point_cloud_library_pcd}
+			Another advantage is that by controlling the file format, PCL can adapt it to best suit PCL libraries. \citep{point_cloud_library_pcd_2010}
 		
 		\subsubsection{K-d tree}
 			In computer science trees are a widely used data structure or abstract data type. In the context of this research paper they are used for creating a search-able data structure to make searching for nearest neighbors faster.
@@ -106,8 +100,12 @@
 			A K-d tree is a space partitioning data structure used for structuring unorganized points. a K-d tree is a structure designed specifically for multi dimensional situations, hence the name k-dimensional tree, where k is the dimension of the search space. The advantage of this data type is that is can handle many different types of queries very efficiently \citep{bentley_multidimensional_1975}.
 		
 		
-		\subsubsection{Wavefront .obj}
-			OBJ (or .OBJ) is a geometry definition file format first developed by Wavefront Technologies
+		\subsubsection{Wavefront obj}
+			Obj (or .OBJ) is a geometry definition file format first developed by Wavefront Technologies, used to store object composed of lines, polygons, free-form curves and surfaces.
+			
+			 Obj files don't not require a header making them easier to change, add to or remove from. Obj circumvents this need for a header by having a key at the beginning of every line, for example; "v" for veracities and "f" for a face.
+			 
+			 
 		
 	
 	\subsection{Open Multi-Processing}
@@ -115,7 +113,7 @@
 	
 	OpenMP is used in some of Point Cloud Libraries stock functions and allow multi-threading to speed up processing times. unfortunately it is not supported for the segmentation algorithms because race conditions prevent it from being correctly implemented. 
 	
-	The Normal estimation class in Point Cloud Library has an OpenMP replacement that is 100\% compatible with the single-threaded function, so requires no effort to run the normal estimation up to 8 times faster depending on the number of cores the computer has to offer.
+	The Normal estimation class in Point Cloud Library has an OpenMP replacement that is 100\% compatible with the single-threaded function, no effort is required to run normal estimation on a point cloud up to 8 times faster depending on the number of cores the computer has available.
 	
 
 	

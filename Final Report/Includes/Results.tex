@@ -16,14 +16,14 @@ The point clouds are processes through an command line program that takes in the
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.9\linewidth]{"Includes/images/Normal Comp/k = 5 ver 2"}
+			\includegraphics[width=1\linewidth]{"Includes/images/Normal Comp/k = 5 ver 2"}
 			\caption{$k$ = 5}
 			\label{fig:k=5}
 		\end{figure}
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.9\linewidth]{"Includes/images/Normal Comp/k = 200 ver 2"}
+			\includegraphics[width=1\linewidth]{"Includes/images/Normal Comp/k = 200 ver 2"}
 			\caption{$k$ = 200}
 			\label{fig:k=200}
 		\end{figure}
@@ -37,31 +37,58 @@ The point clouds are processes through an command line program that takes in the
 		\subsection{Region Growing}
 		\label{RegionGrowParams}
 			
-		Once the normals have been calculated the point cloud is segmented using region growing. Region growing takes in 5 parameters; Minimum cluster size, Maximum cluster size, Number of neighbours, Smoothness threshold and Curvature threshold.
+		Once the normals have been calculated the point cloud is segmented using region growing. Region growing takes in 5 parameters; Minimum cluster size, Maximum cluster size,Search Method, Number of neighbours, Smoothness threshold and Curvature threshold.
 		
 		In the case of this project bigger segments are good, so the Maximum cluster size value was never set allowing clusters be as large as the need to be.
 		
 		The minimum cluster size was set to 5000 points because the chances of a significant wall section being less than 5000 points is very low, having this large number also removes a lot of the clutter in a room. Removing clutter is an important part of this project as any small segment thats not a part of the extent of the room (i.e. walls, roof or floor) will create problems with the rest of the program.
 		
-				
+		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.9\linewidth]{"Includes/images/RegionGrowing/min-size = 100"}
+			\includegraphics[width=1\linewidth]{"Includes/images/RegionGrowing/min-size = 100"}
 			\caption{Minimum Cluster Size = 100}
 			\label{fig:min-size=100}
 		\end{figure}
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.9\linewidth]{"Includes/images/RegionGrowing/min-size = 5000"}
+			\includegraphics[width=1\linewidth]{"Includes/images/RegionGrowing/min-size = 5000"}
 			\caption{Minimum Cluster Size = 5000}
 			\label{fig:min-size=5000}
 		\end{figure}
+		
+		The Smoothness and Curvature thresholds are very important in this project as the outcome relies on planar segments so strict thresholds on curvature and smoothness are important to make sure that any segment is a planar segment and does not cover two sides of a room. You can see in Figure \ref{fig:NoSmoothCurv} that the roof and right hand wall are one segment, resulting in a fitted plane that goes at a 45\textdegree\: angle through the room. As well as the person in the figure who is large enough to pass all the tests but is most defiantly not a wall.
+		
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{Includes/images/RegionGrowing/NoSmoothCurv}
+			\caption{Region Growing Run with no Smoothness or Curvature Thresholds set}
+			\label{fig:NoSmoothCurv}
+		\end{figure}
+	
+		Number of neighbours makes the door show up!
+		
+		
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Includes/images/RegionGrowing/neighbours-5}
+\caption{}
+\label{fig:neighbours-5}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Includes/images/RegionGrowing/neighbours-200}
+\caption{}
+\label{fig:neighbours-200}
+\end{figure}
 
 		
 		\begin{lstlisting}
 MinClusterSize = 5000;
-NumberOfNeighbours = 40;
+NumberOfNeighbours = 20;
 SmoothnessThreshold = (1.0 * M_PI / 180);
 CurvatureThreshold = 1.0;
 		\end{lstlisting}
@@ -126,12 +153,7 @@ CurvatureThreshold = 1.0;
 			\begin{equation}
 			80\textdegree < \theta < 100\textdegree
 			\end{equation}
-			\begin{figure}[H]
-				\centering
-				\includegraphics[width=0.7\linewidth]{"Includes/images/Selected segments"}
-				\caption{Selected segments}
-				\label{fig:Selectedsegments}
-			\end{figure}
+
 			
 	\section{Model Generation}
 	

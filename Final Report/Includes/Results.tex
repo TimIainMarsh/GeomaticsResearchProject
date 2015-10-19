@@ -171,8 +171,13 @@ float CurvatureThreshold = 1.0;
 			
 			\subsubsection{Filtering of the Horizontal Segments}
 			
-			The process of finding the highest and lowest points in a segment is simply a loop through all the points keeping the points with the highest and lowest z values.\\
-			\\
+			When deciding what is the roof and what is the floor in the whole point cloud a reasonable assumption to make is that the highest and lowest segments are the roof and floor respectively.
+			
+			To find the highest and lowest segments is fairly simple. While looping through all the horizontal segments determine which segment has the highest average $z$ value and the lowest average $z$ value. These two segments are added to the filtered vertical segments in an array called Extent\_Clusters.
+			
+			The Extent\_Clusters array contains only the outer most segments, essentially the roof, floor and walls.
+			
+			
 
 			
 			

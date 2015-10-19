@@ -90,9 +90,10 @@
 		
 		If after a seed point has been through the process and the number of points does not reach the user defined minimum size, the region removed from the cloud as unclassified. Unclassified points are removed from the cloud completely after the process is terminated.
 		
+		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.6\linewidth]{Includes/images/GrownRegions}
+			\includegraphics[width=0.5\linewidth]{Includes/images/GrownRegions}
 			\caption{Red Points represent unclassified points}
 			\label{fig:GrownRegions}
 		\end{figure}
@@ -102,7 +103,7 @@
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.6\linewidth]{Includes/images/RG-noUnclass}
+			\includegraphics[width=0.5\linewidth]{Includes/images/RG-noUnclass}
 			\caption{Segmented room with unclassified points removed}
 			\label{fig:RG-noUnclass}
 		\end{figure}
@@ -221,7 +222,7 @@
 			\end{description}
 			
 	\subsection{Plane with Plane Intersection}
-	
+	\label{plane-planeInter}
 	The fitting of planes to segments as spoken about in Section \ref{RANSAC expl} is a precursor to finding the intersection line of planar segments. Once a plane has been fitted to each segment, finding the line of intersection is simple 3D geometry.
 	
 	The intersection of two planes with the equations $a_1x + b_1y + c_1z = d_1$ and $a_2x + b_2y + c_2z = d_2$ will result in a parameterized line, $L$, with the form $L = L_0 + t\vec{u}$ where $\vec{u}$ is the direction vector of the line and $L_0$ is a point on the line.

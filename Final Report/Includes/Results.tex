@@ -58,7 +58,7 @@ The point clouds are processes through an command line program that takes in the
 			\label{fig:min-size=5000}
 		\end{figure}
 		
-		The Smoothness and Curvature thresholds are very important in this project as the outcome relies on planar segments so strict thresholds on curvature and smoothness are important to make sure that any segment is a planar segment and does not cover two sides of a room. You can see in Figure \ref{fig:NoSmoothCurv} that the roof and right hand wall are one segment, resulting in a fitted plane that goes at a 45\textdegree\: angle through the room. As well as the person in the figure who is large enough to pass all the tests but is most defiantly not a wall.
+		The Smoothness and Curvature thresholds are very important in this project as the outcome relies on planar segments so strict thresholds on curvature and smoothness are important to make sure that any segment is a planar segment and does not cover two sides of a room. You can see in Figure \ref{fig:NoSmoothCurv} that the roof and right hand wall are one segment, resulting in a fitted plane that goes at a 45\textdegree\: angle through the room. As well as the person in the figure who is large enough to pass all the tests but is most defiantly not a feature that needs to be kept. So because this project relies heavily on planes the Smoothness and Curvature thresholds are strictly set so that only planar segments are kept.
 		
 		
 		\begin{figure}[H]
@@ -68,32 +68,32 @@ The point clouds are processes through an command line program that takes in the
 			\label{fig:NoSmoothCurv}
 		\end{figure}
 	
-		Number of neighbours makes the door show up!
+		Number of neighbours and search method in region growing is the same as in the normal computation. The number of neighbours is set to the same value as the normal calculation. the main difference in varying values for number of neighbours is that with a very low value, shown in fig. \ref{fig:neighbours-5}, the door can be seen as a separate segment to the wall and with a large value the door becomes part of the wall. This becomes important later 
 		
 		
-\begin{figure}[H]
-\centering
-\includegraphics[width=1\linewidth]{Includes/images/RegionGrowing/neighbours-5}
-\caption{}
-\label{fig:neighbours-5}
-\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{Includes/images/RegionGrowing/neighbours-5}
+			\caption{}
+			\label{fig:neighbours-5}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{Includes/images/RegionGrowing/neighbours-200}
+			\caption{}
+			\label{fig:neighbours-200}
+		\end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=1\linewidth]{Includes/images/RegionGrowing/neighbours-200}
-\caption{}
-\label{fig:neighbours-200}
-\end{figure}
+		The final parameters, as shown in the constants.h file, are as follows:
 
-		
-		\begin{lstlisting}
-MinClusterSize = 5000;
-NumberOfNeighbours = 20;
-SmoothnessThreshold = (1.0 * M_PI / 180);
-CurvatureThreshold = 1.0;
+		\begin{lstlisting}[frame = single, language = c++]
+int MinClusterSize = 5000;
+int NumberOfNeighbours = 40;
+float SmoothnessThreshold = (1.0 * M_PI / 180);
+float CurvatureThreshold = 1.0;
 		\end{lstlisting}
-		
-		
+			
 	
 			The segmentation of the point cloud is the most time consuming function in the whole process, taking up on average 80\% of total run-time.
 			
@@ -103,59 +103,82 @@ CurvatureThreshold = 1.0;
 
 	\section{Surface Extraction}
 	
-	It is immediately evident in Figure \ref{fig:RG-noUnclass} that there are too many small segments that are not necessary and irreverent to the final output. So it becomes necessary to filter these segments out.
+	It is immediately evident in Figure \ref{fig:min-size=100} that there are too many small segments that are not necessary and irreverent to the final output. So it becomes necessary to filter these segments out. The first obvious step is to up the minimum cluster size like in figure \ref{fig:min-size=5000}. But even with the larger cluster size There are still a number of segments that need to be filtered out.
 	
-	To begin this, a vector of the segments is created after the region growing has taken place.
+	To begin this, a array of the segments is created after the region growing has taken place.
 
 
 	\subsection{Segment selection}
-		The vector of segments created in the segmentation section of the program is not entirely useful due to the fact that it contains segments all the segments.
+		The array of segments created in the segmentation section of the program is not entirely useful due to the fact that it contains segments all the segments.
 		
 		Most of the segments are small cluttering objects, like sides of desks of tops of tables. In process of trying to extract the boundaries of a room all this clutter is unnecessary, so we need to filter it out somehow.
 		\subsubsection{filtering out Horizontal and Vertical surfaces}
-			To start this process, the vector of segments is split up into two separate vectors, horizontal segments and vertical segments. This is done by iterating through the segments and deciding which category they fall under.
+			To start this process, the array of segments is split up into two separate arrays, horizontal segments and vertical segments. This is done by iterating through the segments and deciding which category they fall under.
 			
-			By fitting a plane to the segment using the RANSAC method outlined above we can determine its orientation from the coefficients $a$, $b$, and $c$ of the planes equation.
+			A plane is fitted to the segment using the RANSAC method outlined in section \ref{RANSAC expl}. Now the orientation of the segment can be determined from the coefficients $a$, $b$, and $c$ of the planes equation.
 			
 			\begin{equation}
 			ax + by + cz = d  \quad\quad
 			\vec{n}_{segment} = \begin{bmatrix}a\\b\\c\end{bmatrix}
 			\end{equation}
 			
-			So with the normal of the segment determined we can compare it to a vector that runs parallel to the Z axis. The obvious choice of a vertical vector is:
+			Once the normal to the segment is determined it is compares to a known vertical vector $\vec{v}$. 
 			
 			\begin{equation}
 			\vec{v} = \begin{bmatrix}0\\0\\1\end{bmatrix}
 			\end{equation}
 			
-			Then to get the angle between the two vectors we take the dot product:
+			The angle between the two vectors is then the deviation the normal has from vertical and can be thought of as the angle the segment has from vertical. The angle is found using the dot product:
 			
 			\begin{equation}
 			\vec{n}_{segment}\cdot \vec{v} = \norm{\vec{n}_{segment}} \norm{\vec{v}} cos \theta
 			\end{equation}
 			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.5\linewidth]{"Includes/images/normal to plane"}
+				\caption{The deflection of the plane normal from vertical}
+				\label{fig:normaltoplane}
+			\end{figure}
+
+			
 			Solving for $\theta$ gives us the angle between the segment and vertical. From here it is easy to decide if a segment is horizontal or vertical, by seeing if $\theta$ is closer to 0\textdegree/180\textdegree or 90\textdegree.
 			
-		\subsubsection{Selection of Vertical Segments}
-			
-			The vertical extent of the segment is determined by finding the highest and lowest points and getting the distance between them:
+		\subsubsection{Filtering of Vertical Segments}
+		
+			Vertical segments are filtered through two tests:
+			\begin{enumerate}
+				\item The vertical Extent of the Segment.
+				
+				\item Another angle check.
+			\end{enumerate}
+			 
+			The vertical extent of the segment is determined by finding the highest, $max = (x_{max},y_{max},z_{max})$, and lowest, $min = (x_{min},y_{minx},z_{min})$ , points and getting the distance between them:
 			
 			\begin{equation}
 			Vertical \: Extent = \sqrt{(x_{max} - x_{min})^2+(y_{max} - y_{min})^2+(z_{max} - z_{min})^2}
 			\end{equation}
 			
-			If the vertical extent of a segment is less that 1m, it is safe to assume that the segment does not make up part of the walls of the room.\\
+			If the vertical extent of a segment is less that 1m the segment is removed on the basis that it is to small. And does not represent a wall.\\
 			\\
-			The process of finding the highest and lowest points in a segment is simply a loop through all the points keeping the points with the highest and lowest z values.\\
-			\\
-			The selection based on Angle is simply an extension of the previous method for splitting the the segments based on orientation, but with a much more strict angle defining vertical, $\theta$ must fall within $\pm$10\textdegree of 90\textdegree:
+			
+			The selection based on Angle is simply an extension of the previous method for splitting the the segments based on orientation, but with a much more strict angle defining vertical, $\theta$ must fall within $\pm$10\textdegree of 90\textdegree, i.e. the segment must be within a 10\textdegree of perfectly vertical:
 			
 			\begin{equation}
 			80\textdegree < \theta < 100\textdegree
 			\end{equation}
+			
+			
+			\subsubsection{Filtering of the Horizontal Segments}
+			
+			The process of finding the highest and lowest points in a segment is simply a loop through all the points keeping the points with the highest and lowest z values.\\
+			\\
 
 			
+			
 	\section{Model Generation}
+	
+	
 	
 	
 	\section{Creating Obj file}

@@ -103,17 +103,17 @@
 		\subsubsection{Wavefront obj}
 			Obj (or .OBJ) is a geometry definition file format first developed by Wavefront Technologies, used to store object composed of lines, polygons, free-form curves and surfaces.
 			
-			 Obj files don't not require a header making them easier to change, add to or remove from. Obj circumvents this need for a header by having a key at the beginning of every line, for example; "v" for veracities and "f" for a face.
+			Obj files don't not require a header making them easier to change, add to or remove from. Obj circumvents this need for a header by having a key at the beginning of every line, for example; "v" for veracities and "f" for a face.
 			 
 			 
 		
 	
 	\subsection{Open Multi-Processing}
-	OpenMP is an application programming interface (API) for writing multi-threaded applications. Certain functions in Point Cloud Library have support for multi-threading using OpenMP.
-	
-	OpenMP is used in some of Point Cloud Libraries stock functions and allow multi-threading to speed up processing times. unfortunately it is not supported for the segmentation algorithms because race conditions prevent it from being correctly implemented. 
-	
-	The Normal estimation class in Point Cloud Library has an OpenMP replacement that is 100\% compatible with the single-threaded function, no effort is required to run normal estimation on a point cloud up to 8 times faster depending on the number of cores the computer has available.
+		OpenMP is an application programming interface (API) for writing multi-threaded applications. Certain functions in Point Cloud Library have support for multi-threading using OpenMP.
+		
+		OpenMP is used in some of Point Cloud Libraries stock functions and allow multi-threading to speed up processing times. unfortunately it is not supported for the segmentation algorithms because race conditions prevent it from being correctly implemented. 
+		
+		The Normal estimation class in Point Cloud Library has an OpenMP replacement that is 100\% compatible with the single-threaded function, no effort is required to run normal estimation on a point cloud up to 8 times faster depending on the number of cores the computer has available.
 	
 
 	

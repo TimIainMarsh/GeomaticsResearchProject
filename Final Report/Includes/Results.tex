@@ -231,7 +231,7 @@ float CurvatureThreshold = 1.0;
 			If the two segments pass this test, then they are intersected using the method in section \ref{plane-planeInter} and a line of intersection is returned.
 			
 		\subsection{Adjusting the boundary points}
-		%TODO: make this section make sense!
+		%TODO: make this section readable!
 			There are 4 points essentially defining each segment, it is these 4 points that are adjusted so that the segment representing a wall actually defines a wall. To do this a series of adjustments are applied to the boundary points so that they work their way outward towards the corners of the room. This is done using the Projection function.
 			
 			Only one of the segments boundary points are adjusted because all segments will meet twice, due to the loops running through all segments. This means that the first loops segment boundaries are adjusted with reference to the second loop, and the second loops segment boundaries are never adjusted.\\
@@ -313,6 +313,21 @@ float CurvatureThreshold = 1.0;
 			\includegraphics[width=1\linewidth]{Includes/images/f/full4}
 			\caption{}
 			\label{fig:full2}
+			\end{figure}
+
+			\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{Includes/images/f/full2}
+			\caption{}
+			\label{fig:full3}
+			\end{figure}
+			
+			
+			\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{Includes/images/f/untitled}
+			\caption{}
+			\label{fig:untitled}
 			\end{figure}
 
 

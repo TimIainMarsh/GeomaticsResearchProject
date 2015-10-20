@@ -206,6 +206,7 @@ float CurvatureThreshold = 1.0;
 		The model generation section of this project is where the planar segments are turned into vertices's and faces so that they can be written to an obj file.
 		
 		\subsection{Boundaries of Segments}
+		\label{boundaries}
 			Step 1 in this process is to get the Oriented Bounding boxes of each of the segments. because the segments are planar the bounding boxes are also planar. This means that when a 3D cube is fitted to the segment there are only 4 unique points representing the cube as opposed to 8.
 			
 			The 4 duplicate points are therefore removed leaving 4 points that are coplanar to the segment to represent the boundary of the segment as shown in Figure \ref{fig:BOundingBox}.
@@ -220,19 +221,93 @@ float CurvatureThreshold = 1.0;
 			It is these coplanar boundary points that are adjusted to the corners of the room.
 			
 		\subsection{Plane with Plane intersection}
+		\label{planeInterResults}
 			As we have planes fitted to each segment from earlier in section \ref{Filtering} time can be saved by not fitting them again.
 			
-			For this section two loops are run inside each other, iterating over the array Extent\_Clusters. This makes it possible to intersect all the segments with each other, but also introduces the issue of the program attempting to intersect the same plane with itself of parallel planes with themselves, resulting in lines of intersection way off towards infinity of just errors.
-			
-			To solve this the same function that checks the angle between the plane normal and vertical (section \ref{DotProdSec}) is used to check the angle between the two planes. If this angle is less than 15\textdegree\: then that pair of segments is skipped.
-
+			For this section two loops are run inside each other, iterating over the array Extent\_Clusters. This makes it possible to intersect all the segments with each other, but also introduces the issue of the program attempting to intersect the same plane with itself of parallel planes with themselves, resulting in lines of intersection way off towards infinity of just errors.\\
+			\\
+			To solve this the same function that checks the angle between the plane normal and vertical (section \ref{DotProdSec}) is used to check the angle between the two planes. If this angle is less than 15\textdegree\: then that pair of segments is skipped.\\
+			\\
 			If the two segments pass this test, then they are intersected using the method in section \ref{plane-planeInter} and a line of intersection is returned.
 			
-		\subsection{Deciding Which Points to Adjust}
-			There are 4 points essentially defining each segment, it is these 4 points that are adjusted so that the segment representing a wall actually defines a wall. To do this we project the two closest points onto the line.
-	
-%project = dist to line --> project to line
-	
+		\subsection{Adjusting the boundary points}
+			There are 4 points essentially defining each segment, it is these 4 points that are adjusted so that the segment representing a wall actually defines a wall. To do this a series of adjustments are applied to the boundary points so that they work their way outward towards the corners of the room. This is done using the Projection function.
+			
+			Only one of the segments boundary points are adjusted because all segments will meet twice, due to the loops running through all segments. This means that the first loops segment boundaries are adjusted with reference to the second loop, and the second loops segment boundaries are never adjusted.\\
+			\\
+			The projection function is provided with only 2 objects, the line of intersection that was created in section \ref{planeInterResults}, and the boundaries, created in \ref{boundaries}, of the cluster to be adjusted.\\
+			\\
+			The Projection function projects the closest two points, determined using the method in Section \ref{DistanceOfPointToLine}, using the method determined in Section \ref{ProjectionOntoLine}.
+			
+			This process is graphically shown in Figure \ref{fig:4Adjust}, sub-figure (a) shows the first iteration, (b) shows the second, and so on.
+			
+			The two red points circled in each of the figures are the closest two points to the line of intersection. These points are projected onto the line of intersection, this projection is shown by the arrows.
+			
+			\begin{figure}[H] 
+				\begin{subfigure}[b]{0.5\linewidth}
+					\centering
+					\includegraphics[width=0.9\linewidth]{"Includes/images/Project Points/F-1"} 
+					\caption{First iteration} 
+					\label{fig4Adjust:a} 
+					\vspace{4ex}
+				\end{subfigure}%% 
+				\begin{subfigure}[b]{0.5\linewidth}
+					\centering
+					\includegraphics[width=0.9\linewidth]{"Includes/images/Project Points/F-2"} 
+					\caption{Second iteration} 
+					\label{fig4Adjust:b} 
+					\vspace{4ex}
+				\end{subfigure} 
+				\begin{subfigure}[b]{0.5\linewidth}
+					\centering
+					\includegraphics[width=0.9\linewidth]{"Includes/images/Project Points/F-3"} 
+					\caption{Third iteration} 
+					\label{fig4Adjust:c} 
+				\end{subfigure}%%
+				\begin{subfigure}[b]{0.5\linewidth}
+					\centering
+					\includegraphics[width=0.9\linewidth]{"Includes/images/Project Points/F-4"} 
+					\caption{Fourth iteration} 
+					\label{fig4Adjust:d} 
+				\end{subfigure} 
+				\caption{The iterative projection of boundary points to the lines of intersection}
+				\label{fig:4Adjust} 
+			\end{figure}
+			
+			Figure \ref{fig:F-5} shows the complete path taken by each boundary point as it is projected onto each line of intersection. The blue points are starting positions of the boundary points as calculated in \ref{boundaries}. These points after projection result in the red points.
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.6\linewidth]{"Includes/images/Project Points/F-5"}
+				\caption{The final positions of the boundary points represented by the Red points and original positions represented by the Blue points}
+				\label{fig:F-5}
+			\end{figure}
+			
+		\subsection{Dealing with Duplicate Boundary Points}
+			Due to the fact that the corner of a room is created by the intersection of 3 segment planes, there will be 3 boundary points at each corner, one for each segments plane.
+			
+			These points do not always have the same value and usually vary by up to 5cm. To solve this issue of multiple points where there should be one point, a simple clustering algorithm is run to group together points close together.
+			
+			The clustering algorithm simply take points that are within 5cm of each other and places them in an array defining that corner.
+			
+			The array is then averaged and that average value set as the value of the 3 corner points. Resulting in 1 point representing a corner.
+			
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.7\linewidth]{Includes/images/CornerAveraging}
+				\caption{}
+				\label{fig:CornerAveraging}
+			\end{figure}
+			
+			Figure \ref{fig:CornerAveraging} shows in black what the corner of a room without averaged points will look like. The red point and lines shows what the corner will look like after averaging.
+
+
+		\subsection{Creating the Model from the Projected\\ Boundary Points}
+			
+
+
+
+
 	\section{Creating Obj file}
 			
 					

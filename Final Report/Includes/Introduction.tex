@@ -1,86 +1,60 @@
-%Introduction
-%-Nature of the problem
-%-Why the problem is important
-%-How your research would contribute to the solution of the problem
 
 \chapter{Introduction}
-
-%The reconstruction of precise surfaces from unorganized
-%point clouds derived from laser scanner data or
-%photogrammetric image measurements is a very hard
-%problem, not completely solved and problematic in case of
-%incomplete, noisy and sparse data.
-
-POINTS $--->$ MODEL\\
-\\
-
-3D representations of buildings vary largely in terms of how rigorously the models are structured. There are two extremes to it, the first is highly structured models, made in CAD software, of the buildings before or after the building has been built. These models are made by people using measurements.
-
-The other end of the scale is 3D points clouds created by laser scanners that are entirely unstructured, this is because they are just points floating in a 3D space. There is no relation from one point to another.
-
-For taking surveying related measurements having just a point cloud works fine, you can pick out specific points and do measurements across the points. But when 3D models are used for more complex applications such as an as in engineering and architecture, just having a point cloud will not cut it. These applications need structure that a point cloud can produce.
-
-So it becomes necessary to create structure in these 3D points clouds, or to create relationships between these point. This is usually done by turning the point cloud into 3D models that engineers and architects can then work on and use. There is an added advantage that some methods used for point cloud segmentation work with by classifying the points which allows for the 3D model to have labels.
-
-
-
-\section{Objectives}
-
-The objective of this project is to be able to create boundary representation models from laser scans of an indoor environment.
-
-Point clouds are notoriously difficult to navigate on computers, especially the interior of buildings. creating a wire frame model makes the buildings interior easier to navigate, measure and use in a practical way.
-
-The goal of surface reconstruction can be said as follows: Given a set of sample points P assumed to lie on or near an unknown surface S, create a surface model S' approximating S.
-
-A surface reconstruction procedure cannot guarantee the recovering of the surface exactly, since we have information about the surface only through a finite set of points.
-
-\section{Implementation}
-
-
-
-The programming will be done in C++ as this language is popular , has a large community and supports many large and popular libraries such as Point Cloud Library (PCL). 
-
-Using C++ and PCL an algorithm to complete these tasks with as little intervention as possible will be written as an add on function onto existing software.
-
-
-
-
-\section{Research Questions}
-\begin{itemize}
 	
-	\item What is the best and most efficient method to segment a point cloud?
+	\section{Subject of the Report}
 	
-	\item What is the best method of getting model coefficients of planar segments?
+		Point cloud resulting from laser scans are highly unstructured entities, there is no information in the point cloud other that point locations and often times colour and intensity. None of this says anything about the indoor area scanned. Models need to be created from these point clouds but with not much more information other than the locations of the points it is not easy. This is the where the field of Machine learning comes in.
+		
+		This Report sets out to use Machine learning ideas and Algorithms to take laser scanned point clouds of indoor environments and create boundary representations of them as accurately as possible.
 	
-	\item (Combine surface to create models)
+	\section{Background to The Investigation}
 	
-	\item What is the most effective boundary representation storage method?
+		3D representations of buildings vary largely in terms of how rigorously the models are structured. There are two extremes to it, the first is highly structured models, made in CAD software.
+		
+		The other end of the scale is 3D points clouds created by laser scanners that are entirely unstructured.
+		
+		For taking surveying related measurements having just a point cloud works fine, you can pick out specific points and do measurements across the points. But when 3D models are used for more complex applications such as an as in engineering and architecture, just having a point cloud will not cut it. These applications need structure that a laser scanned point cloud cannot produce.
+		
+		So it becomes necessary to create structure in these points clouds. This is usually done by turning the point cloud into a 3D model that engineers and architects can then work on and use.
+		
+	\section{Objectives}
 	
-\end{itemize}
-
-
-\section{Other Considerations}
-
--sub sample
-
--speed
-
--output file
-
--
-
-
-
-
-\section{Outcomes}
-
-The outcome of this paper will be to create an automatic system that creates 3D boundary representation models from laser scans of rooms. 
-
-The program will be created in C++ using Point Cloud Library (PCL) and then be used as an add on function for existing point cloud software.
-
-
-
-
+		The primary objective of this project is to be able to create boundary representation models from indoor laser scans. This will be achieved by answering a few simple questions:
+		
+		\begin{itemize}
+			\item What Is the most accurate and efficient method to estimate normals for every point in a point cloud?
+			
+			\item What is the most efficient method to segment a point cloud?
+			
+			\item What are the best segmentation parameters to use for an indoor environment?
+			
+			\item What is the best way to filter out unwanted segments after segmentation?
+			
+			\item What is the best method to fit planes segments?
+			
+			\item How can planar segments of a point cloud be turned into boundary representations of their entire extent?
+			
+		\end{itemize}
+	
+	\section{Implementation}
+	
+		The programming will be done in C++ as it is a popular, well documented language and supports many large and extensive libraries such as Point Cloud Library (PCL) and Eigen. 
+		
+		Using C++ and PCL an algorithm to complete these tasks with as little user input as possible will be created.
+	
+	\section{Scope and limitations}
+		This Report uses a room in the Menzies building at the University of Cape Town as there are many available scans of the room.
+		
+		The algorithm is not limited by noise in the point cloud but by the complexity of the room that is scanned. 
+	
+	
+	\section{Outcomes}
+	
+		The outcome of this paper will be to create an automatic system that creates 3D boundary representation models as accurately as possible from indoor laser scans.
+	
+	
+	
+	
 
 
 

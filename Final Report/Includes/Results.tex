@@ -231,15 +231,16 @@ float CurvatureThreshold = 1.0;
 			If the two segments pass this test, then they are intersected using the method in section \ref{plane-planeInter} and a line of intersection is returned.
 			
 		\subsection{Adjusting the boundary points}
+		%TODO: make this section make sense.
 			There are 4 points essentially defining each segment, it is these 4 points that are adjusted so that the segment representing a wall actually defines a wall. To do this a series of adjustments are applied to the boundary points so that they work their way outward towards the corners of the room. This is done using the Projection function.
 			
 			Only one of the segments boundary points are adjusted because all segments will meet twice, due to the loops running through all segments. This means that the first loops segment boundaries are adjusted with reference to the second loop, and the second loops segment boundaries are never adjusted.\\
 			\\
-			The projection function is provided with only 2 objects, the line of intersection that was created in section \ref{planeInterResults}, and the boundaries, created in \ref{boundaries}, of the cluster to be adjusted.\\
+			The Projection function is provided with only 2 objects, the line of intersection that was created earlier, and the boundaries points that were created in \ref{boundaries}.\\
 			\\
-			The Projection function projects the closest two points, determined using the method in Section \ref{DistanceOfPointToLine}, using the method determined in Section \ref{ProjectionOntoLine}.
+			The Projection function projects the closest two points, determined using the method in Section \ref{DistanceOfPointToLine}, using the Projection Algorithm  defined in Section \ref{ProjectionOntoLine}.
 			
-			This process is graphically shown in Figure \ref{fig:4Adjust}, sub-figure (a) shows the first iteration, (b) shows the second, and so on.
+			This process is graphically shown in Figure \ref{fig:4Adjust},  sub-figure (a) shows the first iteration, (b) shows the second, and so on.
 			
 			The two red points circled in each of the figures are the closest two points to the line of intersection. These points are projected onto the line of intersection, this projection is shown by the arrows.
 			
@@ -302,12 +303,17 @@ float CurvatureThreshold = 1.0;
 			Figure \ref{fig:CornerAveraging} shows in black what the corner of a room without averaged points will look like. The red point and lines shows what the corner will look like after averaging.
 
 
-		\subsection{Creating the Model from the Projected\\ Boundary Points}
+		\subsection{Creating the B-rep Model from the Adjusted Boundary Points}
+			Creating the boundary representation model from the the averaged, Adjusted boundary points is the last part of this project. The model is created by iterating through each set of boundary points and writing each one of them as a separate object to an OBJ file as outlined in Section \ref{makeOBJfile}. Resulting is a simple boundary representation of the original laser scan.
 			
-
-
-
-
-	\section{Creating Obj file}
+			The output of the B-rep model are lines representing the edges of the room as seen in Figure \ref{fig:full2}.
 			
+			\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{Includes/images/f/full4}
+			\caption{}
+			\label{fig:full2}
+			\end{figure}
+
+
 					

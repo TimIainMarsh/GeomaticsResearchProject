@@ -230,7 +230,10 @@ float CurvatureThreshold = 1.0;
 			\\
 			If the two segments pass this test, then they are intersected using the method in section \ref{plane-planeInter} and a line of intersection is returned.
 			
-		\subsection{Adjusting the boundary points}
+		\subsection{Adjusting the boundary points through Extrusion}
+		
+		EXTRUSION
+		
 		%TODO: make this section readable!
 			There are 4 points essentially defining each segment, it is these 4 points that are adjusted so that the segment representing a wall actually defines a wall. To do this a series of adjustments are applied to the boundary points so that they work their way outward towards the corners of the room. This is done using the Projection function.
 			
@@ -284,7 +287,7 @@ float CurvatureThreshold = 1.0;
 				\label{fig:F-5}
 			\end{figure}
 			
-		\subsection{Dealing with Duplicate Boundary Points}
+		\subsection{Dealing with Duplicate Corner Points}
 			Due to the fact that the corner of a room is created by the intersection of 3 segment planes, there will be 3 boundary points at each corner, one for each segments plane.
 			
 			These points do not always have the same value and usually vary by up to 5cm. To solve this issue of multiple points where there should be one point, a simple clustering algorithm is run to group together points close together.
@@ -296,7 +299,7 @@ float CurvatureThreshold = 1.0;
 			\begin{figure}
 				\centering
 				\includegraphics[width=0.7\linewidth]{Includes/images/CornerAveraging}
-				\caption{}
+				\caption{Duplicate Cornet points shown in black, averaged corner shown in red.}
 				\label{fig:CornerAveraging}
 			\end{figure}
 			
@@ -329,6 +332,34 @@ float CurvatureThreshold = 1.0;
 			\caption{}
 			\label{fig:untitled}
 			\end{figure}
+			
+	\section{Comparison of model to Real Measurements}
+	
+	In determining if the resulting Boundaries are correct, and a good representation of the room that has been scanned, measurements were taken of the room with a distometer and corresponding measurements were taken on the model. the results of this comparison can be seen in table \ref{MeasurmensTable}. 
 
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|c|c c c|}
+				\hline  & Distometer & Model & Difference \\ 
+				\hline 1 & 7.205 & 7.208 & 0.003 \\ 
+				\hline 2 & 5.426 & 5.420 & 0.006 \\ 
+				\hline 3 & 7.203 & 7.206 & 0.003 \\ 
+				\hline 4 & 5.422 & 5.427 & 0.005 \\ 
+				\hline H 1 & 2.505 & 2.495 & 0.010 \\ 
+				\hline H 2 & 2.495 & 2.479 & 0.016 \\ %TODO get actual disto for heights
+				\hline
+			\end{tabular}
+			\caption{Measurements with a distometer versus measurements taken on the model}
+			\label{MeasurmensTable}
+		\end{table}
+	
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.7\linewidth]{Includes/images/Results/Selection_013}
+			\caption{Locations of the measurements in Table \ref{MeasurmensTable}}
+			\label{fig:SourceOfMEasure}
+		\end{figure}
 
+			It is interesting to note that the Oriented bounding box of the room has the dimensions 5.795m, 7.455m, 2.900m. The OBB is therefore 37cm bigger along th width of the building, 25cm in the length and 40cm bigger vertically. This is important because it my look like a bounding box has been created but that is not the case.
 					

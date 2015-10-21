@@ -1,21 +1,52 @@
 
-@misc{weisstein_point-line_????,
-	type = {Text},
-	title = {Point-{Line} {Distance}--3-{Dimensional}},
-	copyright = {Copyright 1999-2015 Wolfram Research, Inc.  See http://mathworld.wolfram.com/about/terms.html for a full terms of use statement.},
-	abstract = {Let a line in three dimensions be specified by two points x\_1=(x\_1,y\_1,z\_1) and x\_2=(x\_2,y\_2,z\_2) lying on it, so a vector along the line is given by  v=[x\_1+(x\_2-x\_1)t; y\_1+(y\_2-y\_1)t; z\_1+(z\_2-z\_1)t].  (1)   The squared distance between a point on the line with parameter t and a point x\_0=(x\_0,y\_0,z\_0) is therefore  d{\textasciicircum}2=[(x\_1-x\_0)+(x\_2-x\_1)t]{\textasciicircum}2+[(y\_1-y\_0)+(y\_2-y\_1)t]{\textasciicircum}2+[(z\_1-z\_0)+(z\_2-z\_1)t]{\textasciicircum}2.   (2)   To minimize the distance, set d(d{\textasciicircum}2)/dt=0 and solve for t to obtain ...},
-	language = {en},
-	urldate = {2015-10-18TZ},
-	author = {Weisstein, Eric W.}
+@article{hoover_experimental_1996,
+	title = {An experimental comparison of range image segmentation algorithms},
+	volume = {18},
+	issn = {0162-8828},
+	doi = {10.1109/34.506791},
+	abstract = {A methodology for evaluating range image segmentation algorithms is proposed. This methodology involves (1) a common set of 40 laser range finder images and 40 structured light scanner images that have manually specified ground truth and (2) a set of defined performance metrics for instances of correctly segmented, missed, and noise regions, over- and under-segmentation, and accuracy of the recovered geometry. A tool is used to objectively compare a machine generated segmentation against the specified ground truth. Four research groups have contributed to evaluate their own algorithm for segmenting a range image into planar patches.},
+	number = {7},
+	journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	author = {Hoover, A. and Jean-Baptiste, G. and Jiang, X. and Flynn, P.J. and Bunke, H. and Goldgof, D.B. and Bowyer, K. and Eggert, D.W. and Fitzgibbon, A. and Fisher, R.B.},
+	month = jul,
+	year = {1996},
+	keywords = {Artificial intelligence, Computer vision, Geometrical optics, Geometry, Image segmentation, Laser noise, Measurement standards, Pixel, Shape, Testing, image classification, image segmentation, laser range finder images, laser ranging, over-segmentation, performance metrics, planar patches, range image segmentation algorithms, recovered geometry, structured light scanner images, under-segmentation},
+	pages = {673--689}
 }
 
-@misc{point_cloud_library_pcd_2010,
-	type = {Code {Documentation}},
-	title = {The {PCD} ({Point} {Cloud} {Data}) file format},
-	url = {http://pointclouds.org/documentation/tutorials/pcd\_file\_format.php},
-	journal = {Point Cloud Library},
-	author = {Point Cloud Library},
-	year = {2010}
+@article{mura_automatic_2014,
+	title = {Automatic room detection and reconstruction in cluttered indoor environments with complex room layouts},
+	volume = {44},
+	issn = {0097-8493},
+	doi = {10.1016/j.cag.2014.07.005},
+	urldate = {2015-09-30TZ},
+	journal = {Computers \& Graphics},
+	author = {Mura, Claudio and Mattausch, Oliver and Jaspe Villanueva, Alberto and Gobbetti, Enrico and Pajarola, Renato},
+	month = nov,
+	year = {2014},
+	keywords = {Indoor scene reconstruction, LIDAR reconstruction, Point cloud processing},
+	pages = {20--32}
+}
+
+@article{bhanu_automatic_1986,
+	title = {Automatic target recognition: {State} of the art survey},
+	shorttitle = {Automatic target recognition},
+	number = {4},
+	urldate = {2015-10-06TZ},
+	journal = {Aerospace and Electronic Systems, IEEE Transactions on},
+	author = {Bhanu, Bir},
+	year = {1986},
+	pages = {364--379}
+}
+
+@inproceedings{sappa_fast_2001,
+	title = {Fast range image segmentation by an edge detection strategy},
+	urldate = {2015-10-06TZ},
+	booktitle = {3-{D} {Digital} {Imaging} and {Modeling}, 2001. {Proceedings}. {Third} {International} {Conference} on},
+	publisher = {IEEE},
+	author = {Sappa, Angel D. and Devy, Michel},
+	year = {2001},
+	pages = {292--299}
 }
 
 @article{arun_least_1987,
@@ -31,6 +62,55 @@
 	year = {1987},
 	keywords = {Application software, Computer vision, Economic indicators, Iterative algorithms, Matrix decomposition, Motion estimation, Parameter estimation, Position measurement, Quaternions, Singular value decomposition, least-squares, quaternion},
 	pages = {698--700}
+}
+
+@article{bentley_multidimensional_1975,
+	title = {Multidimensional {Binary} {Search} {Trees} {Used} for {Associative} {Searching}},
+	volume = {18},
+	issn = {0001-0782},
+	doi = {10.1145/361002.361007},
+	abstract = {This paper develops the multidimensional binary search tree (or k-d tree, where k is the dimensionality of the search space) as a data structure for storage of information to be retrieved by associative searches. The k-d tree is defined and examples are given. It is shown to be quite efficient in its storage requirements. A significant advantage of this structure is that a single data structure can handle many types of queries very efficiently. Various utility algorithms are developed; their proven average running times in an n record file are: insertion, O(log n); deletion of the root, O(n(k-1)/k); deletion of a random node, O(log n); and optimization (guarantees logarithmic performance of searches), O(n log n). Search algorithms are given for partial match queries with t keys specified [proven maximum running time of O(n(k-t)/k)] and for nearest neighbor queries [empirically observed average running time of O(log n).] These performances far surpass the best currently known algorithms for these tasks. An algorithm is presented to handle any general intersection query. The main focus of this paper is theoretical. It is felt, however, that k-d trees could be quite useful in many applications, and examples of potential uses are given.},
+	number = {9},
+	urldate = {2015-10-07TZ},
+	journal = {Commun. ACM},
+	author = {Bentley, Jon Louis},
+	month = sep,
+	year = {1975},
+	keywords = {associative retrieval, attribute, binary search trees, binary tree insertion, information retrieval system, intersection queries, key, nearest neighbor queries, partial match queries},
+	pages = {509--517}
+}
+
+@inproceedings{sanchez_planar_2012,
+	title = {Planar 3D modeling of building interiors from point cloud data},
+	doi = {10.1109/ICIP.2012.6467225},
+	booktitle = {2012 19th {IEEE} {International} {Conference} on {Image} {Processing} ({ICIP})},
+	author = {Sanchez, V. and Zakhor, A.},
+	month = sep,
+	year = {2012},
+	keywords = {3D indoor modeling, Data models, Floors, PCA, Principal component analysis, RANSAC, Shape, Solid modeling, Three dimensional displays, building interiors, buildings (structures), large-scale architectural structure detection, model-fitting, planar 3D modeling, point cloud, point cloud data, range scanners, small-scale architectural structures, solid modelling, structural engineering computing},
+	pages = {1777--1780}
+}
+
+@misc{weisstein_point-line_????,
+	type = {Text},
+	title = {Point-{Line} {Distance}--3-{Dimensional}},
+	copyright = {Copyright 1999-2015 Wolfram Research, Inc.  See http://mathworld.wolfram.com/about/terms.html for a full terms of use statement.},
+	url = {http://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html},
+	abstract = {Let a line in three dimensions be specified by two points x\_1=(x\_1,y\_1,z\_1) and x\_2=(x\_2,y\_2,z\_2) lying on it, so a vector along the line is given by  v=[x\_1+(x\_2-x\_1)t; y\_1+(y\_2-y\_1)t; z\_1+(z\_2-z\_1)t].  (1)   The squared distance between a point on the line with parameter t and a point x\_0=(x\_0,y\_0,z\_0) is therefore  d{\textasciicircum}2=[(x\_1-x\_0)+(x\_2-x\_1)t]{\textasciicircum}2+[(y\_1-y\_0)+(y\_2-y\_1)t]{\textasciicircum}2+[(z\_1-z\_0)+(z\_2-z\_1)t]{\textasciicircum}2.   (2)   To minimize the distance, set d(d{\textasciicircum}2)/dt=0 and solve for t to obtain ...},
+	language = {en},
+	urldate = {2015-10-18TZ},
+	author = {Weisstein, Eric W.}
+}
+
+@book{dunteman_principal_1989,
+	title = {Principal {Components} {Analysis}},
+	isbn = {9780803931046},
+	language = {en},
+	publisher = {SAGE},
+	author = {Dunteman, George H.},
+	month = may,
+	year = {1989},
+	keywords = {Mathematics / Probability \& Statistics / Multivariate Analysis, Social Science / Research}
 }
 
 @article{fischler_random_1981,
@@ -50,31 +130,18 @@
 	pages = {381--395}
 }
 
-@article{bentley_multidimensional_1975,
-	title = {Multidimensional {Binary} {Search} {Trees} {Used} for {Associative} {Searching}},
-	volume = {18},
-	issn = {0001-0782},
-	doi = {10.1145/361002.361007},
-	abstract = {This paper develops the multidimensional binary search tree (or k-d tree, where k is the dimensionality of the search space) as a data structure for storage of information to be retrieved by associative searches. The k-d tree is defined and examples are given. It is shown to be quite efficient in its storage requirements. A significant advantage of this structure is that a single data structure can handle many types of queries very efficiently. Various utility algorithms are developed; their proven average running times in an n record file are: insertion, O(log n); deletion of the root, O(n(k-1)/k); deletion of a random node, O(log n); and optimization (guarantees logarithmic performance of searches), O(n log n). Search algorithms are given for partial match queries with t keys specified [proven maximum running time of O(n(k-t)/k)] and for nearest neighbor queries [empirically observed average running time of O(log n).] These performances far surpass the best currently known algorithms for these tasks. An algorithm is presented to handle any general intersection query. The main focus of this paper is theoretical. It is felt, however, that k-d trees could be quite useful in many applications, and examples of potential uses are given.},
-	number = {9},
-	urldate = {2015-10-07TZ},
-	journal = {Commun. ACM},
-	author = {Bentley, Jon Louis},
-	month = sep,
-	year = {1975},
-	keywords = {associative retrieval, attribute, binary search trees, binary tree insertion, information retrieval system, intersection queries, key, nearest neighbor queries, partial match queries},
-	pages = {509--517}
-}
-
-@article{schomaker_fit_1959,
-	title = {To fit a plane or a line to a set of points by least squares},
-	volume = {12},
-	number = {8},
-	urldate = {2015-10-07TZ},
-	journal = {Acta crystallographica},
-	author = {Schomaker, V. and Waser, J. and Marsh, R. E. and and Bergman, G.},
-	year = {1959},
-	pages = {600--604}
+@article{adams_seeded_1994,
+	title = {Seeded region growing},
+	volume = {16},
+	issn = {0162-8828},
+	doi = {10.1109/34.295913},
+	number = {6},
+	journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	author = {Adams, R. and Bischof, L.},
+	month = jun,
+	year = {1994},
+	keywords = {Australia, Filters, Image segmentation, Mathematics, Pixel, Robustness, Statistics, Surface fitting, Surface morphology, Surface topography, intensity image segmentation, seed selection, seeded region growing},
+	pages = {641--647}
 }
 
 @article{rabbani_segmentation_2006,
@@ -88,53 +155,6 @@
 	pages = {248--253}
 }
 
-@article{hoover_experimental_1996,
-	title = {An experimental comparison of range image segmentation algorithms},
-	volume = {18},
-	issn = {0162-8828},
-	doi = {10.1109/34.506791},
-	abstract = {A methodology for evaluating range image segmentation algorithms is proposed. This methodology involves (1) a common set of 40 laser range finder images and 40 structured light scanner images that have manually specified ground truth and (2) a set of defined performance metrics for instances of correctly segmented, missed, and noise regions, over- and under-segmentation, and accuracy of the recovered geometry. A tool is used to objectively compare a machine generated segmentation against the specified ground truth. Four research groups have contributed to evaluate their own algorithm for segmenting a range image into planar patches.},
-	number = {7},
-	journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
-	author = {Hoover, A. and Jean-Baptiste, G. and Jiang, X. and Flynn, P.J. and Bunke, H. and Goldgof, D.B. and Bowyer, K. and Eggert, D.W. and Fitzgibbon, A. and Fisher, R.B.},
-	month = jul,
-	year = {1996},
-	keywords = {Artificial intelligence, Computer vision, Geometrical optics, Geometry, Image segmentation, Laser noise, Measurement standards, Pixel, Shape, Testing, image classification, image segmentation, laser range finder images, laser ranging, over-segmentation, performance metrics, planar patches, range image segmentation algorithms, recovered geometry, structured light scanner images, under-segmentation},
-	pages = {673--689}
-}
-
-@inproceedings{sappa_fast_2001,
-	title = {Fast range image segmentation by an edge detection strategy},
-	urldate = {2015-10-06TZ},
-	booktitle = {3-{D} {Digital} {Imaging} and {Modeling}, 2001. {Proceedings}. {Third} {International} {Conference} on},
-	publisher = {IEEE},
-	author = {Sappa, Angel D. and Devy, Michel},
-	year = {2001},
-	pages = {292--299}
-}
-
-@article{bhanu_automatic_1986,
-	title = {Automatic target recognition: {State} of the art survey},
-	shorttitle = {Automatic target recognition},
-	number = {4},
-	urldate = {2015-10-06TZ},
-	journal = {Aerospace and Electronic Systems, IEEE Transactions on},
-	author = {Bhanu, Bir},
-	year = {1986},
-	pages = {364--379}
-}
-
-@inproceedings{sanchez_planar_2012,
-	title = {Planar 3D modeling of building interiors from point cloud data},
-	doi = {10.1109/ICIP.2012.6467225},
-	booktitle = {2012 19th {IEEE} {International} {Conference} on {Image} {Processing} ({ICIP})},
-	author = {Sanchez, V. and Zakhor, A.},
-	month = sep,
-	year = {2012},
-	keywords = {3D indoor modeling, Data models, Floors, PCA, Principal component analysis, RANSAC, Shape, Solid modeling, Three dimensional displays, building interiors, buildings (structures), large-scale architectural structure detection, model-fitting, planar 3D modeling, point cloud, point cloud data, range scanners, small-scale architectural structures, solid modelling, structural engineering computing},
-	pages = {1777--1780}
-}
-
 @phdthesis{radu_bogdan_rusu_semantic_2009,
 	address = {Germany},
 	type = {{PHD}},
@@ -145,41 +165,22 @@
 	year = {2009}
 }
 
-@article{mura_automatic_2014,
-	title = {Automatic room detection and reconstruction in cluttered indoor environments with complex room layouts},
-	volume = {44},
-	issn = {0097-8493},
-	doi = {10.1016/j.cag.2014.07.005},
-	urldate = {2015-09-30TZ},
-	journal = {Computers \& Graphics},
-	author = {Mura, Claudio and Mattausch, Oliver and Jaspe Villanueva, Alberto and Gobbetti, Enrico and Pajarola, Renato},
-	month = nov,
-	year = {2014},
-	keywords = {Indoor scene reconstruction, LIDAR reconstruction, Point cloud processing},
-	pages = {20--32}
+@misc{point_cloud_library_pcd_2010,
+	type = {Code {Documentation}},
+	title = {The {PCD} ({Point} {Cloud} {Data}) file format},
+	url = {http://pointclouds.org/documentation/tutorials/pcd\_file\_format.php},
+	journal = {Point Cloud Library},
+	author = {Point Cloud Library},
+	year = {2010}
 }
 
-@book{dunteman_principal_1989,
-	title = {Principal {Components} {Analysis}},
-	isbn = {9780803931046},
-	language = {en},
-	publisher = {SAGE},
-	author = {Dunteman, George H.},
-	month = may,
-	year = {1989},
-	keywords = {Mathematics / Probability \& Statistics / Multivariate Analysis, Social Science / Research}
-}
-
-@article{adams_seeded_1994,
-	title = {Seeded region growing},
-	volume = {16},
-	issn = {0162-8828},
-	doi = {10.1109/34.295913},
-	number = {6},
-	journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
-	author = {Adams, R. and Bischof, L.},
-	month = jun,
-	year = {1994},
-	keywords = {Australia, Filters, Image segmentation, Mathematics, Pixel, Robustness, Statistics, Surface fitting, Surface morphology, Surface topography, intensity image segmentation, seed selection, seeded region growing},
-	pages = {641--647}
+@article{schomaker_fit_1959,
+	title = {To fit a plane or a line to a set of points by least squares},
+	volume = {12},
+	number = {8},
+	urldate = {2015-10-07TZ},
+	journal = {Acta crystallographica},
+	author = {Schomaker, V. and Waser, J. and Marsh, R. E. and and Bergman, G.},
+	year = {1959},
+	pages = {600--604}
 }

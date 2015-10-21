@@ -62,7 +62,7 @@
 			
 			\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.7\linewidth]{Includes/images/Normals}
+			\includegraphics[width=1\linewidth]{Includes/images/Normals}
 			\caption{Normals calculated over a cut down section of a point cloud (the roof has been removed for ease of viewing)}
 			\label{fig:Normals}
 			\end{figure}
@@ -93,20 +93,20 @@
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.5\linewidth]{Includes/images/GrownRegions}
-			\caption{Red Points represent unclassified points}
-			\label{fig:GrownRegions}
-		\end{figure}
-		
-		The unclassified points are of no use, and are therefore removed.
-		
-		
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.5\linewidth]{Includes/images/RG-noUnclass}
-			\caption{Segmented room with unclassified points removed}
-			\label{fig:RG-noUnclass}
-		\end{figure}
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=0.7\linewidth]{Includes/images/GrownRegions}
+				\caption{Result of Region Growing}
+				\label{fig:GrownRegions}
+			\end{subfigure}%
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=0.7\linewidth]{Includes/images/RG-noUnclass}
+				\caption{Unclassified points removed}
+				\label{fig:RG-noUnclass}
+			\end{subfigure}
+			\caption{}
+		\end{figure} 
 		
 		The segments are coloured randomly to make them easier to distinguish for the user.
 		

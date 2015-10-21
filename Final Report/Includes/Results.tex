@@ -231,50 +231,51 @@ float CurvatureThreshold = 1.0;
 			If the two segments pass this test, then they are intersected using the method in section \ref{plane-planeInter} and a line of intersection is returned.
 			
 		\subsection{Adjusting the boundary points through Extrusion}
-		
+		\label{Extrusion}
 		EXTRUSION
 		
 		%TODO: make this section readable!
-			There are 4 points essentially defining each segment, it is these 4 points that are adjusted so that the segment representing a wall actually defines a wall. To do this a series of adjustments are applied to the boundary points so that they work their way outward towards the corners of the room. This is done using the Projection function.
+			There are 4 points essentially defining each segment, it is these 4 points that are extruded so that the segment representing a wall of floor actually represents the full extent of that wall or floor. To do this a series of adjustments are applied to the boundary points so that they work their way outward towards the corners of the room. This is done using the Projection function.
 			
-			Only one of the segments boundary points are adjusted because all segments will meet twice, due to the loops running through all segments. This means that the first loops segment boundaries are adjusted with reference to the second loop, and the second loops segment boundaries are never adjusted.\\
+			Only one of the segments boundary points are projected because all segments will meet twice, due to the two nested loops running through all segments each. This means that the first loops segment boundaries are adjusted with reference to the second loop, and the second loops segment boundaries are never adjusted.\\
 			\\
-			The Projection function is provided with only 2 objects, the line of intersection that was created earlier, and the boundaries points that were created in \ref{boundaries}.\\
+			The Projection function is provided with only 2 objects, the line of intersection that was created earlier, and the boundaries points that were created in \ref{boundaries}. Note that in the line of intersection computation the angle between the two segments is checked as explained in \ref{planeInterResults}.\\
 			\\
-			The Projection function projects the closest two points, determined using the method in Section \ref{DistanceOfPointToLine}, using the Projection Algorithm  defined in Section \ref{ProjectionOntoLine}.
+			The Projection function projects the closest two points, determined using the method in Section \ref{DistanceOfPointToLine}, to the line of intersection between the who segments.
 			
 			This process is graphically shown in Figure \ref{fig:4Adjust},  sub-figure (a) shows the first iteration, (b) shows the second, and so on.
 			
 			The two red points circled in each of the figures are the closest two points to the line of intersection. These points are projected onto the line of intersection, this projection is shown by the arrows.
 			
 			\begin{figure}[H] 
-				\begin{subfigure}[b]{0.5\linewidth}
+				\centering
+				\begin{subfigure}[b]{0.4\linewidth}
 					\centering
-					\includegraphics[width=0.9\linewidth]{"Includes/images/Project Points/F-1"} 
+					\includegraphics[width=0.95\linewidth]{"Includes/images/Project Points/F-1"} 
 					\caption{First iteration} 
 					\label{fig4Adjust:a} 
 					\vspace{4ex}
-				\end{subfigure}%% 
-				\begin{subfigure}[b]{0.5\linewidth}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.4\linewidth}
 					\centering
-					\includegraphics[width=0.9\linewidth]{"Includes/images/Project Points/F-2"} 
+					\includegraphics[width=0.95\linewidth]{"Includes/images/Project Points/F-2"} 
 					\caption{Second iteration} 
 					\label{fig4Adjust:b} 
 					\vspace{4ex}
 				\end{subfigure} 
-				\begin{subfigure}[b]{0.5\linewidth}
+				\begin{subfigure}[b]{0.4\linewidth}
 					\centering
-					\includegraphics[width=0.9\linewidth]{"Includes/images/Project Points/F-3"} 
+					\includegraphics[width=0.95\linewidth]{"Includes/images/Project Points/F-3"} 
 					\caption{Third iteration} 
 					\label{fig4Adjust:c} 
-				\end{subfigure}%%
-				\begin{subfigure}[b]{0.5\linewidth}
+				\end{subfigure}
+				\begin{subfigure}[b]{0.4\linewidth}
 					\centering
-					\includegraphics[width=0.9\linewidth]{"Includes/images/Project Points/F-4"} 
+					\includegraphics[width=0.95\linewidth]{"Includes/images/Project Points/F-4"} 
 					\caption{Fourth iteration} 
 					\label{fig4Adjust:d} 
 				\end{subfigure} 
-				\caption{The iterative projection of boundary points to the lines of intersection}
+				\caption{The iterative extrusion of boundary points to the lines of intersection}
 				\label{fig:4Adjust} 
 			\end{figure}
 			
@@ -309,19 +310,19 @@ float CurvatureThreshold = 1.0;
 		\subsection{Creating the B-rep Model from the Adjusted Boundary Points}
 			Creating the boundary representation model from the the averaged, Adjusted boundary points is the last part of this project. The model is created by iterating through each set of boundary points and writing each one of them as a separate object to an OBJ file as outlined in Section \ref{makeOBJfile}. Resulting is a simple boundary representation of the original laser scan.
 			
-			The output of the B-rep model are lines representing the edges of the room as seen in Figure \ref{fig:full2}.
+			The output of the B-rep model are lines representing the edges of the room as seen in Figure \ref{fig:full2}, \ref{fig:full3} and \ref{fig:untitled}.
 			
 			\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\linewidth]{Includes/images/f/full4}
-			\caption{}
+			\caption{Final Boundary representation of the room looking from the front right corner of the room}
 			\label{fig:full2}
 			\end{figure}
 
 			\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\linewidth]{Includes/images/f/full2}
-			\caption{}
+			\caption{Final Boundary representation of the room looking from the back left corner of the room}
 			\label{fig:full3}
 			\end{figure}
 			
@@ -329,37 +330,8 @@ float CurvatureThreshold = 1.0;
 			\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\linewidth]{Includes/images/f/untitled}
-			\caption{}
+			\caption{Final Boundary representation of the room with segmented cloud}
 			\label{fig:untitled}
 			\end{figure}
 			
-	\section{Comparison of model to Real Measurements}
-	
-	In determining if the resulting Boundaries are correct, and a good representation of the room that has been scanned, measurements were taken of the room with a distometer and corresponding measurements were taken on the model. the results of this comparison can be seen in table \ref{MeasurmensTable}. 
-
-		\begin{table}[H]
-			\centering
-			\begin{tabular}{|c|c c c|}
-				\hline  & Distometer & Model & Difference \\ 
-				\hline 1 & 7.205 & 7.208 & 0.003 \\ 
-				\hline 2 & 5.426 & 5.420 & 0.006 \\ 
-				\hline 3 & 7.203 & 7.206 & 0.003 \\ 
-				\hline 4 & 5.422 & 5.427 & 0.005 \\ 
-				\hline H 1 & 2.505 & 2.495 & 0.010 \\ 
-				\hline H 2 & 2.495 & 2.479 & 0.016 \\ %TODO get actual disto for heights
-				\hline
-			\end{tabular}
-			\caption{Measurements with a distometer versus measurements taken on the model}
-			\label{MeasurmensTable}
-		\end{table}
-	
-		
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.7\linewidth]{Includes/images/Results/Selection_013}
-			\caption{Locations of the measurements in Table \ref{MeasurmensTable}}
-			\label{fig:SourceOfMEasure}
-		\end{figure}
-
-			It is interesting to note that the Oriented bounding box of the room has the dimensions 5.795m, 7.455m, 2.900m. The OBB is therefore 37cm bigger along th width of the building, 25cm in the length and 40cm bigger vertically. This is important because it my look like a bounding box has been created but that is not the case.
-					
+			%TODO potentially add more results in appendix B.

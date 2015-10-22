@@ -232,9 +232,6 @@ float CurvatureThreshold = 1.0;
 			
 		\subsection{Adjusting the boundary points through Extrusion}
 		\label{Extrusion}
-		EXTRUSION
-		
-		%TODO: make this section readable!
 			There are 4 points essentially defining each segment, it is these 4 points that are extruded so that the segment representing a wall of floor actually represents the full extent of that wall or floor. To do this a series of adjustments are applied to the boundary points so that they work their way outward towards the corners of the room. This is done using the Projection function.
 			
 			Only one of the segments boundary points are projected because all segments will meet twice, due to the two nested loops running through all segments each. This means that the first loops segment boundaries are adjusted with reference to the second loop, and the second loops segment boundaries are never adjusted.\\

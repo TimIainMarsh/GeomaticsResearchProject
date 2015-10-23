@@ -1,6 +1,6 @@
 \chapter{Discussion}
 	\label{discussion}
-	The process described in this Report offers a way of creating boundary representations of indoor scans without the need for user interference or preprocessing of the cloud. Section \ref{Comparison} shows that the resulting boundary representation of the room does not differ from the real room by much at all even though the scan is very noisy and even has one wall made up mostly of windows and blinds. 
+	The process described in this Report offers a way of creating boundary representations of indoor scans without the need for user interference or preprocessing of the cloud. Section \ref{Comparison} shows this report has succeeded in creating a boundary representation of an indoor scan that room does not differ from the real room by a significant amount. even though the scan is not the best and there are obstacles for the process to contend with. 
 	
 	\begin{figure}[H]
 	\centering
@@ -23,10 +23,10 @@
 				\hline 3 & 7.203 & 7.206 & 0.003 \\ 
 				\hline 4 & 5.422 & 5.427 & 0.005 \\ 
 				\hline H 1 & 2.492 & 2.495 & 0.003 \\ 
-				\hline H 2 & 2.495 & 2.497 & 0.002 \\ %TODO get actual disto for heights
+				\hline H 2 & 2.495 & 2.497 & 0.002 \\ %TODO try get actual disto
 				\hline
 			\end{tabular}
-			\caption{Measurements with a distometer versus measurements taken on the model}
+			\caption{Measurements with a distometer versus measurements taken on the resulting model}
 			\label{MeasurmensTable}
 		\end{table}
 		
@@ -40,8 +40,8 @@
 		
 		\noindent It is important to note that the Oriented bounding box of the room has the dimensions 5.795m, 7.455m, 2.900m. The OBB is therefore 37cm bigger along the width of the room, 25cm in the length and 40cm bigger vertically. This is important because it may look like a bounding box has been created but that is not the case.
 		
-	\section{Plane Fitting accuracy}
-		Having planes fitted to each planar segment is a key part of the process, the accuracy of these fitted planes is vital to having accuracy in the final output. Figure \ref{fig:Planefitingaccuracy} shows how a segment varies from the fitted plane on the right hand wall. The error ranges from perfect fit, shown in red, to an error of 10mm in the blue section at the top left.
+	\section{Accuracy of resulting model}
+		Figure \ref{fig:Planefitingaccuracy} shows how a specific segment varies from the final model. The error ranges from perfect fit, shown in red, to an error of 10mm in the blue section at the top left. 
 		
 		\begin{figure}[H]
 		\centering
@@ -49,26 +49,35 @@
 		\caption{Blue to Red scale of point variance from fitted plane on right hand wall segment }
 		\label{fig:Planefitingaccuracy}
 		\end{figure}
+		
+		It is easy to see that the only major deviation from a perfect fit is in the top left of the Figure, this is due to a poster being stuck on the wall there. It is reassuring to see that even with the poster on the wall the results have not been effected.
 	
 	\section{Limitations of this process}
-		As it stands the main limitations on this process are the complexity of the room that is scanned. Rooms that are reasonably rectangular can be processed successfully. But as soon as small sections start to kink out or there are walls that start to run at different angles the Extrusion method explained in section \ref{Extrusion} fails. This, as well as networks of rooms will be discussed further in the Conclusions and Future work section.
+		As it stands the main limitations on this process are the complexity of the room that is scanned. Rooms that are reasonably rectangular can be processed successfully. But as soon as small sections start to kink out or there are walls that start to run at different angles the Extrusion method explained in section \ref{Extrusion} fails. This can be seen in the images of a secondary point cloud boundary representation process in Appendix B.
 		
 	\section{File Size}
-		A major benefit for this system is that a large point cloud can be greatly reduced in size without loosing any of the main information about the room. 
+		A benefit of this system is that large point clouds can be greatly reduced in size without loss of to much vital information. 
 		
+		The two indoor scans of around started off with a resolution of 1.3mm point spacing at a distance of 10m, file sizes of around 7GB. Through down sampling the point clouds the point spacing was increased uniformly to a 1cm, reducing file size to less than 50MB. Then after the process outlined is this report is run on the down sampled point cloud they are simplified to 24 points and a file size of under 5KB.
 		
-		
-		START = 25mb - 1,061,000pts
-		\\
-		end  = 1.3k - 24pts
-	
+
 	
 \chapter{Conclusions and Future work}
 
-conclusions..
+In conclusion this report has succeeded is creating a process to create boundary representations of indoor rooms. The process described in this report is still in its infancy, and has a few limitations.	
 
 \section{Future Work}
-	The process described in this report is still in its infancy, and has a few limitations. The ideas in this Report can continue to be extended into more complex rooms and then into multiple rooms, essentially a network of interconnected rooms. \cite{mura_automatic_2014} have shown a very successful method for dealing with multiple rooms.
+	The progression from the point that this process is at can be extended in a number of directions, firstly the current models created are very simplistic and cannot deal with rooms that have more than 6 sides, essentially only very simple rooms. The need for this process to be able to deal with more complex rooms is the first major improvement that will take place. 
 	
-	Another possible road to go down is the start creating more detail in the 3D models created. For instance showing the location of windows and doors in the in the CAD models.
+	From the complexity of the rooms increasing, the detail in the model is the next step in making the process more complete, adding doors and windows into the models. This presents its own new challenges because the program will need to be able to differentiate between wall segments, door segments and general cluttering segments. This makes the segments selection section substantially more important.
+	
+	Finally the next logical step in this process is the ability to deal with a network of rooms presented in one file. Figure \ref{fig:complexscene} shows a complex network or rooms that could potentially be turned into CAD models in the future of this process. 
+	
+	
+	\begin{figure}[htb]
+		\centering
+		\includegraphics[width=0.8\linewidth]{"Includes/images/Results/complex scene"}
+		\caption{A more complex network of rooms within a building}
+		\label{fig:complexscene}
+	\end{figure}
 	

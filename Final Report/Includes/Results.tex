@@ -217,7 +217,6 @@ float CurvatureThreshold = 1.0;
 				\caption{The 4 Boundary points of the segment indicated by the red circles}
 				\label{fig:BOundingBox}
 			\end{figure}
-			
 			It is these coplanar boundary points that are adjusted to the corners of the room.
 			
 		\subsection{Plane with Plane intersection}
@@ -226,49 +225,49 @@ float CurvatureThreshold = 1.0;
 			
 			For this section two loops are run inside each other, iterating over the array Extent\_Clusters. This makes it possible to intersect all the segments with each other, but also introduces the issue of the program attempting to intersect the same plane with itself of parallel planes with themselves, resulting in lines of intersection way off towards infinity of just errors.\\
 			\\
-			To solve this the same function that checks the angle between the plane normal and vertical (section \ref{DotProdSec}) is used to check the angle between the two planes. If this angle is less than 15\textdegree\: then that pair of segments is skipped.\\
-			\\
+			To solve this the same function that checks the angle between the plane normal and vertical (section \ref{DotProdSec}) is used to check the angle between the two planes. If this angle is less than 15\textdegree\: then that pair of segments is skipped.
+			
 			If the two segments pass this test, then they are intersected using the method in section \ref{plane-planeInter} and a line of intersection is returned.
 			
-		\subsection{Adjusting the boundary points through Extrusion}
+		\subsection{Adjusting the boundary points through\\ Extrusion}
 		\label{Extrusion}
 			There are 4 points essentially defining each segment, it is these 4 points that are extruded so that the segment representing a wall of floor actually represents the full extent of that wall or floor. To do this a series of adjustments are applied to the boundary points so that they work their way outward towards the corners of the room. This is done using the Projection function.
 			
 			Only one of the segments boundary points are projected because all segments will meet twice, due to the two nested loops running through all segments each. This means that the first loops segment boundaries are adjusted with reference to the second loop, and the second loops segment boundaries are never adjusted.\\
 			\\
-			The Projection function is provided with only 2 objects, the line of intersection that was created earlier, and the boundaries points that were created in \ref{boundaries}. Note that in the line of intersection computation the angle between the two segments is checked as explained in \ref{planeInterResults}.\\
-			\\
+			The Projection function is provided with only 2 objects, the line of intersection that was created earlier, and the boundaries points that were created in \ref{boundaries}. Note that in the line of intersection computation the angle between the two segments is checked as explained in \ref{planeInterResults}.
+			
 			The Projection function projects the closest two points, determined using the method in Section \ref{DistanceOfPointToLine}, to the line of intersection between the who segments.
 			
 			This process is graphically shown in Figure \ref{fig:4Adjust},  sub-figure (a) shows the first iteration, (b) shows the second, and so on.
 			
 			The two red points circled in each of the figures are the closest two points to the line of intersection. These points are projected onto the line of intersection, this projection is shown by the arrows.
 			
-			\begin{figure}[H] 
+			\begin{figure}[p] 
 				\centering
-				\begin{subfigure}[b]{0.4\linewidth}
+				\begin{subfigure}[b]{0.49\linewidth}
 					\centering
-					\includegraphics[width=0.95\linewidth]{"Includes/images/Project Points/F-1"} 
+					\includegraphics[width=1\linewidth]{"Includes/images/Project Points/F-1"} 
 					\caption{First iteration} 
 					\label{fig4Adjust:a} 
 					\vspace{4ex}
 				\end{subfigure}
-				\begin{subfigure}[b]{0.4\linewidth}
+				\begin{subfigure}[b]{0.49\linewidth}
 					\centering
-					\includegraphics[width=0.95\linewidth]{"Includes/images/Project Points/F-2"} 
+					\includegraphics[width=1\linewidth]{"Includes/images/Project Points/F-2"} 
 					\caption{Second iteration} 
 					\label{fig4Adjust:b} 
 					\vspace{4ex}
 				\end{subfigure} 
-				\begin{subfigure}[b]{0.4\linewidth}
+				\begin{subfigure}[b]{0.49\linewidth}
 					\centering
-					\includegraphics[width=0.95\linewidth]{"Includes/images/Project Points/F-3"} 
+					\includegraphics[width=1\linewidth]{"Includes/images/Project Points/F-3"} 
 					\caption{Third iteration} 
 					\label{fig4Adjust:c} 
 				\end{subfigure}
-				\begin{subfigure}[b]{0.4\linewidth}
+				\begin{subfigure}[b]{0.49\linewidth}
 					\centering
-					\includegraphics[width=0.95\linewidth]{"Includes/images/Project Points/F-4"} 
+					\includegraphics[width=1\linewidth]{"Includes/images/Project Points/F-4"} 
 					\caption{Fourth iteration} 
 					\label{fig4Adjust:d} 
 				\end{subfigure} 
@@ -281,7 +280,7 @@ float CurvatureThreshold = 1.0;
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=0.6\linewidth]{"Includes/images/Project Points/F-5"}
-				\caption{The final positions of the boundary points represented by the Red points and original positions represented by the Blue points}
+				\caption{The final positions of the boundary points after Extrusion represented by the Red points and original positions represented by the Blue points}
 				\label{fig:F-5}
 			\end{figure}
 			
@@ -332,3 +331,6 @@ float CurvatureThreshold = 1.0;
 			\end{figure}
 			
 			%TODO potentially add more results in appendix B.
+			The results of different point clouds can be found in Appendix B.
+			
+			

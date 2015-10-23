@@ -16,7 +16,7 @@
 		
 		\begin{table}[H]
 			\centering
-			\begin{tabular}{|c|c|c|c|}
+			\begin{tabular}{|c|c c c|}
 				\hline m & Distometer & Model & Difference \\ 
 				\hline 1 & 7.205 & 7.208 & 0.003 \\ 
 				\hline 2 & 5.426 & 5.420 & 0.006 \\ 
@@ -56,6 +56,8 @@
 		As it stands the main limitations on this process are the complexity of the room that is scanned. Rooms that are reasonably rectangular can be processed successfully. But as soon as small sections start to kink out or there are walls that start to run at different angles the Extrusion method explained in section \ref{Extrusion} fails. This can be seen in the images of a secondary point cloud boundary representation process in Appendix B.
 		
 	\section{File Size}
+		%without the loss of information
+	
 		A benefit of this system is that large point clouds can be greatly reduced in size without loss of to much vital information. 
 		
 		The two indoor scans of around started off with a resolution of 1.3mm point spacing at a distance of 10m, file sizes of around 7GB. Through down sampling the point clouds the point spacing was increased uniformly to a 1cm, reducing file size to less than 50MB. Then after the process outlined is this report is run on the down sampled point cloud they are simplified to 24 points and a file size of under 5KB.
@@ -65,6 +67,8 @@
 \chapter{Conclusions and Future work}
 
 In conclusion this report has succeeded is creating a process to create boundary representations of indoor rooms. The process described in this report is still in its infancy, and has a few limitations.	
+
+MORE
 
 \section{Future Work}
 	The progression from the point that this process is at can be extended in a number of directions, firstly the current models created are very simplistic and cannot deal with rooms that have more than 6 sides, essentially only very simple rooms. The need for this process to be able to deal with more complex rooms is the first major improvement that will take place. 

@@ -53,35 +53,44 @@
 		It is easy to see that the only major deviation from a perfect fit is in the top left of the Figure, this is due to a poster being stuck on the wall there. It is reassuring to see that even with the poster on the wall the results have not been effected.
 	
 	\section{Limitations of this process}
+	\label{Limitations}
 		As it stands the main limitations on this process are the complexity of the room that is scanned. Rooms that are reasonably rectangular can be processed successfully. But as soon as small sections start to kink out or there are walls that start to run at different angles the Extrusion method explained in section \ref{Extrusion} fails. This can be seen in the images of a secondary point cloud boundary representation process in Appendix B.
 		
 	\section{File Size}
-		%without the loss of information
 	
-		A benefit of this system is that large point clouds can be greatly reduced in size without loss of to much vital information. 
+		A benefit of this system is that large point clouds can be greatly reduced in size without loss of to much vital information. Of coarse there is a loss of detail, but as said in the previous section this is a current limitation on the process, but can be overcome in future versions of this system.
 		
 		The two indoor scans of around started off with a resolution of 1.3mm point spacing at a distance of 10m, file sizes of around 7GB. Through down sampling the point clouds the point spacing was increased uniformly to a 1cm, reducing file size to less than 50MB. Then after the process outlined is this report is run on the down sampled point cloud they are simplified to 24 points and a file size of under 5KB.
+		
+		Obviously as the detail in the model increases and materials start to be used the file size will increase but never to the extent that a full point cloud will. 
 		
 
 	
 \chapter{Conclusions and Future work}
 
-In conclusion this report has succeeded is creating a process to create boundary representations of indoor rooms. The process described in this report is still in its infancy, and has a few limitations.	
+In conclusion this report has succeeded is creating a process to create boundary representations of indoor rooms. The process described in this report is still in its infancy, and has a few limitations.
 
-MORE
 
-\section{Future Work}
+\section{Improving Detail in the System}
+
 	The progression from the point that this process is at can be extended in a number of directions, firstly the current models created are very simplistic and cannot deal with rooms that have more than 6 sides, essentially only very simple rooms. The need for this process to be able to deal with more complex rooms is the first major improvement that will take place. 
 	
 	From the complexity of the rooms increasing, the detail in the model is the next step in making the process more complete, adding doors and windows into the models. This presents its own new challenges because the program will need to be able to differentiate between wall segments, door segments and general cluttering segments. This makes the segments selection section substantially more important.
 	
-	Finally the next logical step in this process is the ability to deal with a network of rooms presented in one file. Figure \ref{fig:complexscene} shows a complex network or rooms that could potentially be turned into CAD models in the future of this process. 
+\section{Extending the Process to Multiple Rooms}
+	
+	another extension to this system is the ability to process more complex networks of rooms. Figure \ref{fig:complexscene} shows a complex network or rooms that could potentially be turned into CAD models in the future of this process. This concept can be extended even further into multiple story networks. from here it becomes necessary to create topology in the points before they are processed, so that rooms and floors can be differentiated from each other.
 	
 	
 	\begin{figure}[htb]
 		\centering
-		\includegraphics[width=0.8\linewidth]{"Includes/images/Results/complex scene"}
+		\includegraphics[width=1\linewidth]{"Includes/images/Results/complex scene"}
 		\caption{A more complex network of rooms within a building}
 		\label{fig:complexscene}
 	\end{figure}
+	
+\section{User Interface}
+	Currently the whole system is run from a command line and the parameters are fixed with no way to change them other than recompiling the whole project. Creating a user interface that allows users to change parameters themselves as well as a visualizer build into the user interface that allows users change parameters and see the result in the same window. This is the final step in making this system into a full package,is to build additional, and unrelated, functionality into the system. Such as creating mesh models of point clouds or even simple down sampling of clouds. 
+	
+	
 	

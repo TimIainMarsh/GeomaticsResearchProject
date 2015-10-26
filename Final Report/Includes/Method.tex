@@ -12,9 +12,27 @@
 	The aim of this Thesis is, given an uncleaned, noisy point cloud of a room to create an .obj file with lines representing all the edges of that room.
 	
 	
-\section{Down sampling point clouds}
-%TODO Downsample
+\section{Downsampling point clouds}
+
+	Downsampling a point cloud is necessary when the resolution set on the scanner is very high and the cloud has many redundant points in it. For instance a 1m x 1m section of floor could potentially have up to 500 000 points, this is a huge amount of data for a small section of floor. After downsampling to 1cm the number of points drops right down to around 10 000. This si still a lot but is much more manageable, and because this project doesn't work with fine detail downsampling the entire point cloud to a manageable size allows the processing time to go right down without the loss of any accuracy.
 	
+	Downsampling in this project uses a voxelized grid approach. A voxel grid is essentially a regular grid in 3D space (think of a voxel grid as a set of tiny 3D boxes in space). This 3D grid is overlaid on the point cloud data, then within each voxel (each small box) all the points present are approximated with their average point. Figures \ref{BeforeVoxelDownsampling} and \ref{AfterVoxelDownsampling} show the difference between a dense point cloud and a downsampled point cloud.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\linewidth]{Includes/images/Voxel/before}
+		\caption{A point Cloud Before Voxel Downsampling}
+		\label{BeforeVoxelDownsampling}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\linewidth]{Includes/images/Voxel/after}
+		\caption{A Point Cloud After Voxel Downsampling to a 1cm Resolution}
+		\label{AfterVoxelDownsampling}
+	\end{figure}
+
+	By default in this project all clouds that are read in are downsampled to a 1cm resolution before any processing is done on them.
 	
 \section{Segmentation}
 	\label{segmentation-method}

@@ -1,25 +1,26 @@
 \chapter{Literature Review}
-\section{Introduction}
-	Segmentation and classification of indoor scans is an existing problem, a lot of the processes used in the newly created algorithms are not new. They are simply tweaked in such a way so as to produce the result required for an indoor environment. 
+
+	The modeling of indoor environments using laser scans is an existing machine learning problem. There are many new programs and methods that attempt to do this, these new programs and methods do this using lots of older ideas that have simply tweaked and strung together in such a way as to produce the result required for an indoor environment. 
 	
-	This section looks at new and old publications of the processes and algorithms associated with creating the program this thesis set out to make.
+	This section looks at new and old publications of the processes and algorithms associated with modeling of indoor environments.
 	
-	As well as other papers and articles that have created similar programs and systems.
+	As well as other papers and articles that have utilized similar algorithms and processes and how they over came certain problems.
 	
 \section{Algorithms}
+	\subsection{Normal Computation}
+			\subsubsection{Principal Components Analysis}
+			The calculation of point normals is done with a Principal Components Analysis (PCA). A PCA is a statistical technique that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called Principal components. the number of principal components is less than or equal to the dimensions of the data set, so in the case of point clouds 3.
+			
+			The first of the Principal components represents the largest variability in the data set, with the variability decreasing as you go along. Essentially resulting in the 3rd Principal component being the normal to the surface \citep{dunteman_principal_1989}. 
+
 	\subsection{Segmentation}
-		For automatic processing of point clouds the segmentation of the point cloud is one of the most important processes. it is important that the segmentation of the point cloud is correct and the method is the best for the use.
-		
-		\subsubsection{Principal Components Analysis}
-		Principal Components Analysis (PCA), is a statistical technique that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called Principal components. the number of principal components is less than or equal to the dimensions of the data set, so in the case of point clouds 3.
-		
-		The first of the Principal components represents the largest variability in the data set, with the variability decreasing as you go along. essentially resulting in the 3rd Principal component being the normal to the surface \citep{dunteman_principal_1989}. 
+		For automatic processing of point clouds the segmentation of the point cloud is one of the most important steps. It is important that the segmentation of the point cloud is correct and that the method used is the most effective one available.
 		
 		
 		\subsubsection{Edge-based Segmentation}
 		Edge-based segmentation has two main sections to it; first to detect edges in the point cloud, and secondly to group all points contained within the edges as one segment.
 		
-		The algorithm used, however, does not use Edge-based techniques further reading on the topic can be found with \cite{sappa_fast_2001} and \cite{bhanu_automatic_1986}.
+		This report, however, does not use Edge-based techniques so further reading on the topic can be found with \cite{sappa_fast_2001} and \cite{bhanu_automatic_1986}.
 		
 		
 		\subsubsection{Region-based Segmentation}
@@ -27,17 +28,14 @@
 		
 		Region growing for 3D point clouds is an adapted algorithm that was originally created by \cite{adams_seeded_1994} for the segmentation of intensity images.
 		
-		Region growing needs two things; first, seed points based on their curvature values, and secondly criteria in which to extend these points into regions.
+		Region growing needs two things; first, seed points chosen based on their curvature values, and secondly decide upon criteria in which to extend these points into regions.
 		
-		Common criteria include, Colour and normal direction.
+		Common criteria include Colour, normal deviation and curvature.
 		
-		There are several methods for doing these two things as described by \cite{hoover_experimental_1996}.		
+		There are several methods for generating seed points and the growing of these seed points into regions and they are described by \cite{hoover_experimental_1996}.
 		
 		\cite{rabbani_segmentation_2006} proposed the idea of adding a smoothness constraint which finds smoothly connected areas in the point cloud. The method they propose requires a small number of parameters which provide a trade off between over and under segmentation. It is this refined algorithm that point cloud library uses in as its default region growing.
 		
-
-		
-	
 	
 	\subsection{Surface Extraction}		
 	
@@ -46,10 +44,10 @@
 			
 			RANSAC achieves its goal by iteratively selecting a random subset of the original data, this subset of the original data are considered inliers. A model is then fitted to the inliers (A plane or line ect). The remainder of the data set is then compared to the model if a point fits well with the model it is considered a hypothetical inlier. The model is then re-estimated from the hypothetical inliers. The model is then evaluated by the error relative to the inliers of the model.
 			
-			This process is repeated a fixed number of times, each time either rejecting the model if there are too few inliers, or replacing the last saved model if the error is lower.
+			This process is repeated a fixed number of times, each time either rejecting the model if there are too few inliers, or replacing the last saved model if the error is lower. This whole process is described im greater detail later in this Report.
 		
 		\subsubsection{Least Squares Plane fitting}
-			Another method of fitting a plane to a set of 3-dimensional points is through least squares. Least squares itself was created in 1805 by a French mathematician Adrien-Marie Legendre.
+			Another method of fitting a plane to a set of laser scanned points is through least squares. Least squares itself was created in 1805 by a French mathematician Adrien-Marie Legendre.
 			
 			Least squares is used to fit a plane to a point to get the normal of the point by taking a region around the point and fitting the plane to all those points. The process of fitting a plane to a set of points is described by \cite{schomaker_fit_1959}.
 			
@@ -57,7 +55,7 @@
 		\subsubsection{Occlusion in Cluttered Environments}
 			In \citeyear{mura_automatic_2014} \citeauthor{mura_automatic_2014} Presented a robust approach for reconstructing the main architectural structure of complex indoor environments given laser scans of the rooms. within the paper they speak about how large vertical objects can be mistaken for a wall when they are in fact a cabinet or locker or something of that nature.
 			
-			Walls, by definition, cover the full vertical extent of a room. But when working wit laser scans this is not something that you can enforce because there is often clutter in the way so the full extent of the wall is not seen. So to deal with this \citeauthor{mura_automatic_2014} employed a simple visibility test to determine if one segment was 'in-front' of another. They cast rays from the scan center through the OBB (oriented bounding box) and set out to determine if those rays intersected any other segment. If the rays do intersect another segment the first segment obviously lies in-front of the other.
+			Walls, by definition, cover the full vertical extent of a room. But when working with laser scans this is not something that you can enforce because there is often clutter in the way so the full extent of the wall is not seen. So to deal with this \citeauthor{mura_automatic_2014} employed a simple visibility test to determine if one segment was 'in-front' of another. They cast rays from the scan center through the OBB (oriented bounding box) and set out to determine if those rays intersected any other segment. If the rays do intersect another segment the first segment obviously lies in-front of the other.
 		
 	
 	\subsection{Model Generation}
@@ -80,7 +78,7 @@
 		\subsubsection{Point Cloud Data file format}
 			The PCD file format is a file format was created by Point Cloud Library (PCL) for the storage of point cloud files used with their library. PCD is not the only format for storage of point clouds but has been created to offer greater flexibility and speed to reading and writing files.
 			
-			There are two different storage modes of PCD, ASCII form, essentially just plain text with each point on new line separated with a space. And binary form where the data written to the file ia a complete copy of the pcl::PointCloud.points array/vector.
+			There are two different storage modes of PCD, ASCII form, is essentially just plain text with each point on new line separated with a space. And binary form, where the data written to the file is a complete copy of the pcl::PointCloud.points array/vector.
 			
 			The ASCII style of storage makes the cloud usable in other point cloud applications, and is readable and editable by a user in simple text viewers.
 			
@@ -88,9 +86,9 @@
 			\begin{itemize}
 				\item  The ability to store and process organized point cloud datasets - this is of extreme importance for real time applications, and research areas such as augmented reality, robotics, etc
 				
-				\item binary $mmap/munmap$ data types are the fastest possible way of loading and saving data to disk
+				\item Binary $mmap/munmap$ data types are the fastest possible way of loading and saving data to disk
 				
-				\item storing different data types (all primitives supported: char, short, int, float, double) allows the point cloud data to be flexible and efficient with respect to storage and processing.
+				\item Storing different data types (all primitives supported: char, short, int, float, double) allows the point cloud data to be flexible and efficient with respect to storage and processing.
 				
 				\item n-D histograms for feature descriptors - very important for 3D perception/computer vision applications.
 			\end{itemize}

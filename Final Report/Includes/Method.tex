@@ -1,5 +1,5 @@
 
-\chapter{Method}
+\chapter{Method}%TODO Check Caps and sense
 	
 	Points within a 3d point cloud are simply represented by their x, y, z Cartesian coordinates. This means that there is a possibility that there are two points with the same x, y, z coordinates that have been acquired at different times, this is assuming that the origin is the same. Comparing these points is not as easy as one would assume, they may occupy the same point in space, but cannot simply assume that they are the same.
 	
@@ -34,8 +34,7 @@
 
 	By default in this project all clouds that are read in are downsampled to a 1cm resolution before any processing is done on them.
 	
-\section{Segmentation}
-	\label{segmentation-method}
+\section{Normal Computation}
 	\subsection{Principal Components Analysis}
 		A Principal Components Analysis (PCA) is the default method for estimating normals in Point Cloud Library. it is the fastest method because of PCL's multi-threading option for the function.
 		
@@ -90,7 +89,8 @@
 			\end{figure}
 		
 
-				
+\section{Segmentation}
+\label{segmentation-method}
 	\subsection{Region Growing}
 	
 		

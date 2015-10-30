@@ -37,11 +37,11 @@ The point clouds are processes through an command line program that takes in the
 		\subsection{Region Growing}
 		\label{RegionGrowParams}
 			
-		Once the normals have been calculated the point cloud is segmented using region growing. Region growing takes in 5 parameters; Minimum cluster size, Maximum cluster size,Search Method, Number of neighbours, Smoothness threshold and Curvature threshold.
+		Once the normals have been calculated the point cloud is segmented using region growing. Region growing takes in 5 parameters; Minimum cluster size, Maximum cluster Size, Search Method, Number of neighbours, Smoothness threshold and Curvature threshold.
 		
-		In the case of this project bigger segments are good, so the Maximum cluster size value was never set allowing clusters be as large as the need to be.
+		In the case of this project bigger segments are good, so the Maximum cluster size value was never set allowing clusters be as large as they need to be.
 		
-		The minimum cluster size was set to 5000 points because the chances of a significant wall section being less than 5000 points is very low, having this large number also removes a lot of the clutter in a room. Removing clutter is an important part of this project as any small segment thats not a part of the extent of the room (i.e. walls, roof or floor) will create problems with the rest of the program.
+		The minimum cluster size was set to 5000 points. This is because the chances of a significant wall section being less than 5000 points is very low, as said in Section \ref{downsample} a 1m x 1m section of floor has around 8000 points. Having this reasonably large number also removes a lot of the clutter in a room. Removing clutter is an important part of this project as any small segment that are not a part of the extent of the room (i.e. not a wall, roof or part of the floor) will create problems with the rest of the program.
 		
 		
 		\begin{figure}[H]
@@ -68,7 +68,7 @@ The point clouds are processes through an command line program that takes in the
 			\label{fig:NoSmoothCurv}
 		\end{figure}
 	
-		Number of neighbours and search method in region growing is the same as in the normal computation. The number of neighbours is set to the same value as the normal calculation. the main difference in varying values for number of neighbours is that with a very low value, shown in fig. \ref{fig:neighbours-5}, the door can be seen as a separate segment to the wall and with a large value the door becomes part of the wall. This becomes important later 
+		Number of neighbours and search method in region growing is the same as in the normal computation. The number of neighbours is set to the same value as the normal calculation. The main difference in varying values for number of neighbours is that with a very low value, shown in Figure \ref{fig:neighbours-5} and Figure \ref{fig:neighbours-200}, the door can be seen as a separate segment to the wall and with a large value the door becomes part of the wall. 
 		
 		
 		\begin{figure}[H]
@@ -112,7 +112,7 @@ float CurvatureThreshold = 1.0;
 	
 	It is immediately evident in Figure \ref{fig:min-size=100} that there are too many small segments that are not necessary and irreverent to the final output. So it becomes necessary to filter these segments out. The first obvious step is to up the minimum cluster size like in figure \ref{fig:min-size=5000}. But even with the larger cluster size There are still a number of segments that need to be filtered out.
 	
-	To begin this, a array of the segments is created after the region growing has taken place.
+	To begin this, an array of the segments is created after the region growing has taken place.
 
 
 	\subsection{Segment selection}
@@ -195,13 +195,18 @@ float CurvatureThreshold = 1.0;
 			
 			When deciding what is the roof and what is the floor in the whole point cloud a reasonable assumption to make is that the highest and lowest segments are the roof and floor respectively.
 			
-			To find the highest and lowest segments is fairly simple. While looping through all the horizontal segments determine which segment has the highest average $z$ value and the lowest average $z$ value. These two segments are added to the filtered vertical segments in an array called Extent\_Clusters.
+			To find the highest and lowest segments is fairly simple. While looping through all the horizontal segments determine which segment has the highest average $z$ value and the lowest average $z$ value. These two segments are added to the filtered vertical segments in an array called ExtentClusters.
 			
-			The Extent\_Clusters array contains only the outer most segments, essentially the roof, floor and walls.
+			The ExtentClusters array contains only the outer most segments, essentially the roof, floor and walls.
 			
-			
+			\begin{figure}[hbt]
+			\centering
+			\includegraphics[width=1\linewidth]{"Includes/images/SEG Select/final"}
+			\caption{Combined result after filtering horizontal and vertical segments}
+			\label{fig:final}
+			\end{figure}
 
-			
+	\newpage
 	\section{Model Generation}
 		The model generation section of this project is where the planar segments are turned into vertices's and faces so that they can be written to an obj file.
 		
@@ -308,10 +313,7 @@ float CurvatureThreshold = 1.0;
 			
 			The output of the B-rep model are lines representing the edges of the room as seen in Figure \ref{fig:full2}, \ref{fig:full3} and \ref{fig:untitled}.
 			
-			
 			The results of different point clouds can be found in Appendix B.
-			
-			
 			
 			\begin{figure}[H]
 			\centering

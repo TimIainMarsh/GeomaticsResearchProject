@@ -182,14 +182,8 @@ float CurvatureThreshold = 1.0;
 			
 			If the vertical extent of a segment is less that 1m the segment is removed on the basis that it is to small. And does not represent a wall.
 			
-			The selection based on Angle is simply an extension of the previous method for splitting the the segments based on orientation, but with a much more strict angle defining vertical, $\theta$ must fall within $\pm$10\textdegree of 90\textdegree, i.e. the segment must be within a 10\textdegree of perfectly vertical:
+			The selection based on Angle is simply an extension of the previous method for splitting the the segments based on orientation, but with a much more strict angle defining vertical, $\theta$ must fall within $\pm$10\textdegree of 90\textdegree, i.e. the segment must be within a 10\textdegree of perfectly vertical: 	$80\textdegree < \theta < 100\textdegree$.
 			
-			\begin{equation}
-			80\textdegree < \theta < 100\textdegree
-			\end{equation}
-			
-
-
 			
 			\subsubsection{Filtering of the Horizontal Segments}
 			
@@ -238,8 +232,8 @@ float CurvatureThreshold = 1.0;
 		\label{Extrusion}
 			There are 4 points essentially defining each segment, it is these 4 points that are extruded so that the segment representing a wall of floor actually represents the full extent of that wall or floor. To do this a series of adjustments are applied to the boundary points so that they work their way outward towards the corners of the room. This is done using the Projection function.
 			
-			Only one of the segments boundary points are projected because all segments will meet twice, due to the two nested loops running through all segments each. This means that the first loops segment boundaries are adjusted with reference to the second loop, and the second loops segment boundaries are never adjusted.\\
-			\\
+			Only one of the segments boundary points are projected because all segments will meet twice, due to the two nested loops running through all segments each. This means that the first loops segment boundaries are adjusted with reference to the second loop, and the second loops segment boundaries are never adjusted.
+			
 			The Projection function is provided with only 2 objects, the line of intersection that was created earlier, and the boundaries points that were created in \ref{boundaries}. Note that in the line of intersection computation the angle between the two segments is checked as explained in \ref{planeInterResults}.
 			
 			The Projection function projects the closest two points, determined using the method in Section \ref{DistanceOfPointToLine}, to the line of intersection between the who segments.

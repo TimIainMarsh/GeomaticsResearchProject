@@ -9,6 +9,23 @@
 	\label{fig:MessyWall}
 	\end{figure}
 	
+	\section{Analysis of Processes Used}
+		\subsection{Normal Estimation}
+			A Principal Components Analysis is the primary method for individual point normal computation. It was chosen because PCL's standard normal computation has a built in multi-threading function.
+			
+			A PCA has more than enough accuracy and robustness to deal with whatever a point cloud can throw at it.
+			
+		\subsection{Segmentation}
+			The segmentation method used was a standard Region Growing Algorithm because it is the most effective at extracting perfectly planar segments out of very cluttered environments like shown in Figure \ref{fig:MessyWall}. The final parameters used are shown on Page \pageref{RGParams}.
+		
+		\subsection{Filtering of Segments}
+			Due to this project only requiring large planar extent segments the filtering process is rather ruthless and removes any segment that even slightly deviates from the set parameters. The 'removal' of segments was more a movement of segments from an array to a new array of accepted segments. The segments underwent this movement to a new array a number of times until only the final accepted segments were left. 
+			
+		\subsection{Extrusion}
+			The Extrusion method, that has been described in detail above, is a reasonably simple method for finding the corners of a room so that a B-rep model of the room can be created.
+			
+			It is, however, the limiting factor in this projects ability to deal with more complex rooms. This is explained further later on.
+	
 	
 	\section{Comparison of model to Real Measurements}
 		\label{Comparison}

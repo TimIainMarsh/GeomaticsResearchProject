@@ -3,7 +3,7 @@
 	
 	\section{Subject of the Report}
 	
-		Point cloud resulting from laser scans are highly unstructured entities, there is no information in the point cloud other that point locations and often times colour and intensity. None of this says anything about the indoor area scanned. Models need to be created from these point clouds but with not much more information other than the locations of the points it is not easy. This is the where the field of Machine learning comes in.
+		Point cloud resulting from laser scans are highly unstructured things, there is no information in the point cloud other that point locations and often times colour and intensity. None of this says anything about the indoor area scanned. Models need to be created from these point clouds but with not much more information other than the locations of the points. This is the where the field of Machine learning comes in.
 		
 		This Report sets out to use Machine learning ideas and Algorithms to take laser scanned point clouds of indoor environments and create boundary representations of them as accurately as possible.
 	
@@ -13,16 +13,16 @@
 		
 		The other end of the scale is 3D points clouds created by laser scanners that are entirely unstructured.
 		
-		For taking surveying related measurements having just a point cloud works fine, you can pick out specific points and do measurements across the points. But when 3D models are used for more complex applications such as an as in engineering and architecture, just having a point cloud will not cut it. These applications need structure that a laser scanned point cloud cannot produce.
+		For taking surveying related measurements having just a point cloud works fine, you can pick out specific points and do measurements across the points. But when 3D models are required for more complex applications such as an as in engineering and architecture, just having a point cloud will not cut it. These applications need structure that a laser scanned point cloud cannot produce.
 		
 		So it becomes necessary to create structure in these points clouds. This is usually done by turning the point cloud into a 3D model that engineers and architects can then work on and use.
 		
 	\section{Objectives}
 	
-		The primary objective of this project is to be able to create boundary representation models from indoor laser scans. This will be achieved by answering a few questions:
+		The primary objective of this report is to create boundary representations of indoor laser scans. This will be achieved by answering a few smaller questions:
 		
 		\begin{itemize}
-			\item What Is the most accurate and efficient method to estimate normals for every point in a point cloud?
+			\item What is the most efficient method to estimate normals for every point in a point cloud?
 			
 			\item What is the most efficient method to segment a point cloud?
 			
@@ -38,19 +38,18 @@
 	
 	\section{Implementation}
 	
-		The programming will be done in C++ as it is a popular, well documented language and supports many large and extensive libraries such as Point Cloud Library (PCL) and Eigen. 
+		The programming will be created using C++ as it is a popular, well documented language and supports many large and extensive libraries such as Point Cloud Library (PCL) and Eigen. 
 		
-		Using C++ and PCL an algorithm to complete these tasks with as little user input as possible will be created.
+		Using C++ a process will be created to complete these tasks with as little user input as possible.
 	
 	\section{Scope and limitations}
-		This Report uses a room in the Menzies building at the University of Cape Town as there are many available scans of the room.
+		This Report uses a room in the Menzies building at the University of Cape Town as scans of the room are easily available. A single scan is used throughout to make differentiating the impact of each step easier.
 		
-		The algorithm is not limited by noise in the point cloud but by the complexity of the room that is scanned. 
-	
-	
+		Another scans results are available in Appendix \ref{GTL Results}.
+		
 	\section{Outcomes}
 	
-		The outcome of this paper will be to create an automatic system that creates 3D boundary representation models as accurately as possible from indoor laser scans.
+		The outcome of this paper will be to produce an automatic system that creates 3D boundary representation models as accurately as possible from indoor laser scans.
 	
 	
 	

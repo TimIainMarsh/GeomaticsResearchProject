@@ -1,6 +1,6 @@
 \chapter{Discussion}
 	\label{discussion}
-	The process described in this Report offers a way of creating boundary representations of indoor scans without the need for user interference or preprocessing of the cloud. Section \ref{Comparison} shows this report has succeeded in creating a boundary representation of an indoor scan that room does not differ from the real room by a significant amount. even though the scan is not the best and there are obstacles for the process to contend with. 
+	The process described in this Report offers a way of creating boundary representations of indoor scans without the need for user interference or preprocessing of the cloud. Section \ref{Comparison} shows this report has succeeded in creating a boundary representation of an indoor scan that room does not differ from the real room by a significant amount. Even though the scan is not the best and there are obstacles for the process to contend with. 
 	
 	\begin{figure}[H]
 	\centering
@@ -9,10 +9,27 @@
 	\label{fig:MessyWall}
 	\end{figure}
 	
+	\section{Analysis of Processes Used}
+		\subsection{Normal Estimation}
+			A Principal Components Analysis is the primary method for individual point normal computation. It was chosen because PCL's standard normal computation has a built in multi-threading function.
+			
+			A PCA has more than enough accuracy and robustness to deal with whatever a point cloud can throw at it.
+			
+		\subsection{Segmentation}
+			The segmentation method used was a standard Region Growing Algorithm because it is the most effective at extracting perfectly planar segments out of very cluttered environments like shown in Figure \ref{fig:MessyWall}. The final parameters used are shown on Page \pageref{RGParams}.
+		
+		\subsection{Filtering of Segments}
+			Due to this project only requiring large planar extent segments the filtering process is rather ruthless and removes any segment that even slightly deviates from the set parameters. The 'removal' of segments was more a movement of segments from an array to a new array of accepted segments. The segments underwent this movement to a new array a number of times until only the final accepted segments were left. 
+			
+		\subsection{Extrusion}
+			The Extrusion method, that has been described in detail above, is a reasonably simple method for finding the corners of a room so that a B-rep model of the room can be created.
+			
+			It is, however, the limiting factor in this projects ability to deal with more complex rooms. This is explained further later on.
+	
 	
 	\section{Comparison of model to Real Measurements}
 		\label{Comparison}
-		In determining if the resulting Boundaries are correct, and a good representation of the room that has been scanned, measurements were taken of the room with a distometer and corresponding measurements were taken on the model. the results of this comparison can be seen in table \ref{MeasurmensTable}. 
+		In determining if the resulting Boundaries are correct, and a good representation of the room that has been scanned, measurements were taken of the room with a distometer and corresponding measurements were taken on the model. The results of this comparison can be seen in table \ref{MeasurmensTable}. 
 		
 		\begin{table}[H]
 			\centering
@@ -23,7 +40,7 @@
 				\hline 3 & 7.203 & 7.206 & 0.003 \\ 
 				\hline 4 & 5.422 & 5.427 & 0.005 \\ 
 				\hline H 1 & 2.492 & 2.495 & 0.003 \\ 
-				\hline H 2 & 2.495 & 2.497 & 0.002 \\ %TODO try get actual disto
+				\hline H 2 & 2.495 & 2.497 & 0.002 \\ 
 				\hline
 			\end{tabular}
 			\caption{Measurements with a distometer versus measurements taken on the resulting model}
@@ -68,7 +85,7 @@
 	
 \chapter{Conclusions and Future work}
 
-In conclusion this report has succeeded is creating a process to create boundary representations of indoor rooms. The process described in this report is still in its infancy, and has a few limitations.
+In conclusion this report has succeeded is creating a process to create boundary representations of indoor rooms. The process described in this report is still, however, in its infancy, and has a few limitations.
 
 
 \section{Improving Detail in the System}
@@ -79,7 +96,7 @@ In conclusion this report has succeeded is creating a process to create boundary
 	
 \section{Extending the Process to Multiple Rooms}
 	
-	another extension to this system is the ability to process more complex networks of rooms. Figure \ref{fig:complexscene} shows a complex network or rooms that could potentially be turned into CAD models in the future of this process. This concept can be extended even further into multiple story networks. from here it becomes necessary to create topology in the points before they are processed, so that rooms and floors can be differentiated from each other.
+	Another extension to this system is the ability to process more complex networks of rooms. Figure \ref{fig:complexscene} shows a complex network or rooms that could potentially be turned into CAD models in the future of this process. This concept can be extended even further into multiple story networks. From here it becomes necessary to create topology in the points before they are processed, so that rooms and floors can be differentiated from each other.
 	
 	
 	\begin{figure}[htb]

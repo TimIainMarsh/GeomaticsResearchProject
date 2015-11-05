@@ -21,6 +21,9 @@
 	breaklines=true
 }
 
+\widowpenalty10000
+\clubpenalty10000
+
 \usepackage{caption}
 \usepackage{subcaption}
 
@@ -38,18 +41,17 @@
 	
 	%Include Cover Page
 	\input{CoverPage}
-	
 	\thispagestyle{empty}
 	
 	\pagenumbering{roman}
-	\input{Includes/acknowledgments}
+	\input{Includes/acknowledgments} %DONE
 	
 	\input{Includes/PlagarismDeclaration}
 	
-	\includepdf[pagecommand = {}]{Includes/EthicsForm} %TODO: ETHICS FORM
+	\includepdf[pagecommand = {}]{Includes/EthicsForm} %DONE
 	
 
-	\input{Includes/Abstract}
+	\input{Includes/Abstract} %DONE
 	
 	\newpage
 	\tableofcontents
@@ -61,26 +63,24 @@
 	\setcounter{page}{1}
 	\pagenumbering{arabic}
 	
-	\include{Includes/Introduction}
+	\include{Includes/Introduction}%DONE
 
 
-	\include{Includes/LiteratureReview}
-
-	
-	\include{Includes/Method}
+	\include{Includes/LiteratureReview} %DONE
 
 	
-	\include{Includes/Results}
+	\include{Includes/Method}%DONE
 
 	
-	\include{Includes/Conclusions}
+	\include{Includes/Results}%DONE
+
+	
+	\include{Includes/Conclusions}%DONE
 
 	
 	\include{Includes/References}
 
 
-	\include{Includes/appendix}
-	
-	%TODO write about other pointcloud results in appendix
+	\include{Includes/appendix}%DOENE
 	
 \end{document}
